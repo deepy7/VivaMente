@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Brain, Heart, TrendingUp, Shield } from "lucide-react";
+import { Brain, Waypoints, Handshake, Eye, Search, List } from "lucide-react";
 
 export default function HomeUsuario() {
   return (
@@ -10,7 +10,7 @@ export default function HomeUsuario() {
         <div className="flex-1">
           <div className="inline-block px-4 py-2 rounded-full mb-6" style={{ backgroundColor: "#EFFCFB", border: "1px solid #CDECEA" }}>
             <p className="text-sm" style={{ color: "#111827", fontWeight: 600 }}>
-              🧠 Estimulación cognitiva basada en evidencia científica
+              🧠 Estimulación cognitiva accesible
             </p>
           </div>
           
@@ -23,7 +23,7 @@ export default function HomeUsuario() {
           </h1>
           
           <p className="text-gray-600 text-xl leading-relaxed mb-10 max-w-lg">
-            Ejercicios cognitivos sencillos y accesibles, diseñados específicamente para personas con Alzheimer en fases tempranas y moderadas.
+            Ejercicios sencillos y accesibles para mantener tu mente activa y saludable.
           </p>
           
           <div className="flex items-center gap-4">
@@ -150,19 +150,29 @@ export default function HomeUsuario() {
                 description: "Recuerda patrones y ubicaciones de elementos para entrenar tu memoria a corto plazo."
               },
               {
-                icon: <Heart size={32} />,
+                icon: <Waypoints size={32} />,
                 title: "Asociación de Conceptos",
                 description: "Conecta palabras relacionadas para fortalecer vínculos entre ideas y conceptos."
               },
               {
-                icon: <TrendingUp size={32} />,
+                icon: <Eye size={32} />,
                 title: "Atención Selectiva",
                 description: "Identifica elementos diferentes en un grupo para mejorar concentración y observación."
               },
               {
-                icon: <Shield size={32} />,
+                icon: <Handshake size={32} />,
                 title: "Emparejamiento",
                 description: "Encuentra parejas de objetos relacionados ejercitando memoria y lógica."
+              },
+              {
+                icon: <Search size={32} />,
+                title: "Reconocimiento",
+                description: "Identifica objetos y lugares para estimular la memoria visual."
+              },
+              {
+                icon: <List size={32} />,
+                title: "Secuencia",
+                description: "Completa la serie siguiendo el orden correcto."
               }
             ].map((feature, idx) => (
               <div 

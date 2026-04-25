@@ -10,7 +10,7 @@ const games = [
   { id: "atencion",        label: "Atención",          icon: "👁️", desc: "Ejercita la concentración" },
   { id: "emparejar",       label: "Emparejar",         icon: "🃏", desc: "Encuentra los pares iguales" },
   { id: "reconocimiento",  label: "Reconocimiento",    icon: "🔍", desc: "Identifica objetos y lugares" },
-  { id: "secuencia",       label: "Secuencia",         icon: "📋", desc: "Ordena elementos en el orden correcto" },
+  { id: "secuencia",       label: "Secuencia",         icon: "📋", desc: "Completa la serie" }
 ];
 
 export default function Games() {

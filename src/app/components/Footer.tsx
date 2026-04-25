@@ -26,7 +26,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">
-              Plataforma de ejercicios cognitivos diseñada específicamente para personas con Alzheimer en fases tempranas y moderadas.
+              Cuidando la mente, paso a paso.
             </p>
           </div>
 
