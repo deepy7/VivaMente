@@ -298,6 +298,7 @@ export interface CaregiverAssignedUser {
   tiempoTotal: number;
   rachaActual: number;
   statsPorJuego: CaregiverUserGameStat[];
+  favoriteGames?: CaregiverUserGameStat[];
 }
 
 export interface CaregiverSummary {

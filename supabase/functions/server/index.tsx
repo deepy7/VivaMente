@@ -428,6 +428,8 @@ async function getAssignedUsersDetailed(cuidadorId: string) {
   for (const usuario of usuariosFiltrados) {
     const resultados = await getUserResults(usuario.id);
     const stats = calculateStatsFromResults(resultados);
+    const favoritos = await getUserFavorites(usuario.id);
+    const favoriteGames = buildFavoriteGameStats(favoritos, stats.statsPorJuego);
 
     usuariosDetallados.push({
       id: usuario.id,
@@ -451,10 +453,11 @@ async function getAssignedUsersDetailed(cuidadorId: string) {
       aciertosTotales: stats.aciertosTotales,
       erroresTotales: stats.erroresTotales,
       tiempoTotal: stats.tiempoTotal,
-      rachaActual: stats.rachaActual,
-      statsPorJuego: stats.statsPorJuego,
-      resultados,
-    });
+        rachaActual: stats.rachaActual,
+        statsPorJuego: stats.statsPorJuego,
+        favoriteGames,
+        resultados,
+      });
   }
 
   usuariosDetallados.sort((a, b) => {

@@ -12,6 +12,7 @@ import {
   Save,
   ArrowUpDown,
   TrendingUp,
+  Star,
 } from "lucide-react";
 import { caregiverApi } from "../../lib/api";
 import { useAuth } from "../context/AuthContext";
@@ -53,6 +54,10 @@ function getActivityOrderValue(usuario: any) {
 
   if (estado === "Activo") return 1000 + progreso;
   return progreso;
+}
+
+function getFavoriteGames(usuario: any) {
+  return Array.isArray(usuario.favoriteGames) ? usuario.favoriteGames : [];
 }
 
 export default function GestionUsuarios() {
@@ -283,6 +288,7 @@ export default function GestionUsuarios() {
                 {usuariosFiltrados.map((usuario) => {
                   const isSelected = editingUserId === usuario.id;
                   const estado = getEstadoUsuario(usuario);
+                  const favoriteGames = getFavoriteGames(usuario);
 
                   return (
                     <div
@@ -342,12 +348,41 @@ export default function GestionUsuarios() {
                                 type="button"
                                 onClick={() => navigate(`/evolucion-cuidador?usuario=${usuario.id}`)}
                                 className="inline-flex items-center gap-2 text-sm transition-colors cursor-pointer"
-                                style={{ color: "#111827", fontWeight: 700 }}
+                                style={{ color: "#12B8B2", fontWeight: 700 }}
                               >
                                 <TrendingUp size={14} />
                                 Ver evolución
                               </button>
                             </div>
+                          </div>
+
+                          <div className="mt-3 rounded-xl bg-gray-50 p-3">
+                            <div className="mb-2 flex items-center gap-2">
+                              <Star size={14} style={{ color: "#12B8B2" }} />
+                              <p className="text-xs text-gray-500 uppercase" style={{ fontWeight: 600 }}>
+                                Juegos favoritos
+                              </p>
+                            </div>
+                            {favoriteGames.length > 0 ? (
+                              <div className="flex flex-wrap gap-2">
+                                {favoriteGames.map((game: any) => (
+                                  <span
+                                    key={game.gameId}
+                                    className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs"
+                                    style={{
+                                      backgroundColor: "#EFFCFB",
+                                      color: "#0F766E",
+                                      fontWeight: 700,
+                                    }}
+                                  >
+                                    <span aria-hidden="true">{game.icon}</span>
+                                    {game.name}
+                                  </span>
+                                ))}
+                              </div>
+                            ) : (
+                              <p className="text-sm text-gray-500">Sin favoritos marcados</p>
+                            )}
                           </div>
                         </div>
 
@@ -433,12 +468,43 @@ export default function GestionUsuarios() {
                       type="button"
                       onClick={() => navigate(`/evolucion-cuidador?usuario=${selectedUser.id}`)}
                       className="inline-flex items-center gap-2 text-sm transition-colors cursor-pointer"
-                      style={{ color: "#111827", fontWeight: 700 }}
+                      style={{ color: "#12B8B2", fontWeight: 700 }}
                     >
                       <TrendingUp size={14} />
                       Ver evolución
                     </button>
                   </div>
+                </div>
+
+                <div className="mb-6 rounded-xl bg-gray-50 p-4">
+                  <div className="mb-3 flex items-center gap-2">
+                    <Star size={16} style={{ color: "#12B8B2" }} />
+                    <p className="text-xs text-gray-500 uppercase" style={{ fontWeight: 700 }}>
+                      Juegos favoritos
+                    </p>
+                  </div>
+                  {getFavoriteGames(selectedUser).length > 0 ? (
+                    <div className="flex flex-wrap gap-2">
+                      {getFavoriteGames(selectedUser).map((game: any) => (
+                        <span
+                          key={game.gameId}
+                          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm"
+                          style={{
+                            backgroundColor: "#EFFCFB",
+                            color: "#0F766E",
+                            fontWeight: 700,
+                          }}
+                        >
+                          <span aria-hidden="true">{game.icon}</span>
+                          {game.name}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-500">
+                      Este usuario todavÃ­a no ha marcado juegos favoritos.
+                    </p>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
