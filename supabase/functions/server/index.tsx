@@ -31,6 +31,11 @@ const GAME_ICONS: Record<string, string> = {
 
 const APP_TIMEZONE = "Atlantic/Canary";
 const DEFAULT_AVATAR = "avatar-1";
+const AUTH_SYNC_TTL_MS = 60000;
+const ASSIGNED_USERS_CACHE_TTL_MS = 30000;
+let lastAuthSyncAt = 0;
+let authSyncInFlight: Promise<void> | null = null;
+const assignedUsersCache = new Map<string, { timestamp: number; data: any[] }>();
 
 function getTimeZoneDateParts(dateInput: string | Date, timeZone = APP_TIMEZONE) {
   const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
@@ -339,6 +344,27 @@ function formatRelativeActivity(fechaISO?: string | null) {
 }
 
 async function syncAuthUsersToKV() {
+  const now = Date.now();
+  if (now - lastAuthSyncAt < AUTH_SYNC_TTL_MS) {
+    return;
+  }
+
+  if (authSyncInFlight) {
+    return authSyncInFlight;
+  }
+
+  authSyncInFlight = syncAuthUsersToKVNow()
+    .then(() => {
+      lastAuthSyncAt = Date.now();
+    })
+    .finally(() => {
+      authSyncInFlight = null;
+    });
+
+  return authSyncInFlight;
+}
+
+async function syncAuthUsersToKVNow() {
   const { data, error } = await supabase.auth.admin.listUsers({
     page: 1,
     perPage: 1000,
@@ -398,6 +424,8 @@ async function syncAuthUsersToKV() {
       await kv.set(`cuidador:${authUser.id}`, cuidadorData);
     }
   }
+
+  clearAssignedUsersCache();
 }
 
 function normalizeAssignedIds(values: any[] = []) {
@@ -412,7 +440,16 @@ function normalizeAssignedIds(values: any[] = []) {
     .filter(Boolean);
 }
 
+function clearAssignedUsersCache() {
+  assignedUsersCache.clear();
+}
+
 async function getAssignedUsersDetailed(cuidadorId: string) {
+  const cached = assignedUsersCache.get(cuidadorId);
+  if (cached && Date.now() - cached.timestamp < ASSIGNED_USERS_CACHE_TTL_MS) {
+    return cached.data;
+  }
+
   const todosLosUsuarios = await kv.getByPrefix("usuario:");
   const cuidadorData = await kv.get(`cuidador:${cuidadorId}`);
   const usuariosAsociadosIds = normalizeAssignedIds(
@@ -423,15 +460,15 @@ async function getAssignedUsersDetailed(cuidadorId: string) {
     return usuario?.cuidador_asignado === cuidadorId || usuariosAsociadosIds.includes(usuario?.id);
   });
 
-  const usuariosDetallados = [];
-
-  for (const usuario of usuariosFiltrados) {
-    const resultados = await getUserResults(usuario.id);
+  const usuariosDetallados = await Promise.all(usuariosFiltrados.map(async (usuario: any) => {
+    const [resultados, favoritos] = await Promise.all([
+      getUserResults(usuario.id),
+      getUserFavorites(usuario.id),
+    ]);
     const stats = calculateStatsFromResults(resultados);
-    const favoritos = await getUserFavorites(usuario.id);
     const favoriteGames = buildFavoriteGameStats(favoritos, stats.statsPorJuego);
 
-    usuariosDetallados.push({
+    return {
       id: usuario.id,
       nombre: usuario.nombre || "",
       apellidos: usuario.apellidos || "",
@@ -453,12 +490,12 @@ async function getAssignedUsersDetailed(cuidadorId: string) {
       aciertosTotales: stats.aciertosTotales,
       erroresTotales: stats.erroresTotales,
       tiempoTotal: stats.tiempoTotal,
-        rachaActual: stats.rachaActual,
-        statsPorJuego: stats.statsPorJuego,
-        favoriteGames,
-        resultados,
-      });
-  }
+      rachaActual: stats.rachaActual,
+      statsPorJuego: stats.statsPorJuego,
+      favoriteGames,
+      resultados,
+    };
+  }));
 
   usuariosDetallados.sort((a, b) => {
     if (!a.ultimaActividadISO && !b.ultimaActividadISO) {
@@ -467,6 +504,11 @@ async function getAssignedUsersDetailed(cuidadorId: string) {
     if (!a.ultimaActividadISO) return 1;
     if (!b.ultimaActividadISO) return -1;
     return new Date(b.ultimaActividadISO).getTime() - new Date(a.ultimaActividadISO).getTime();
+  });
+
+  assignedUsersCache.set(cuidadorId, {
+    timestamp: Date.now(),
+    data: usuariosDetallados,
   });
 
   return usuariosDetallados;
@@ -548,6 +590,7 @@ app.post("/make-server-ae96b5cd/auth/register", async (c) => {
     };
 
     await kv.set(`usuario:${authData.user.id}`, usuarioData);
+    clearAssignedUsersCache();
 
     return c.json({
       success: true,
@@ -611,6 +654,7 @@ app.post("/make-server-ae96b5cd/auth/admin/register-cuidador", async (c) => {
     };
 
     await kv.set(`cuidador:${authData.user.id}`, cuidadorData);
+    clearAssignedUsersCache();
 
     return c.json({
       success: true,
@@ -813,6 +857,7 @@ app.post("/make-server-ae96b5cd/game/result", async (c) => {
 
     resultadosExistentes.push(resultado.id);
     await kv.set(resultadosKey, resultadosExistentes);
+    clearAssignedUsersCache();
 
     return c.json({
       success: true,
@@ -900,6 +945,7 @@ app.post("/make-server-ae96b5cd/user/favorites/toggle", async (c) => {
       : [...favoritosActuales, gameId];
 
     await kv.set(`favoritos_usuario:${auth.user.id}`, favoritos);
+    clearAssignedUsersCache();
 
     return c.json({
       success: true,
@@ -991,6 +1037,7 @@ app.put("/make-server-ae96b5cd/user/profile/avatar", async (c) => {
     };
 
     await kv.set(`usuario:${auth.user.id}`, usuarioActualizado);
+    clearAssignedUsersCache();
 
     return c.json({
       success: true,
@@ -1158,6 +1205,7 @@ app.put("/make-server-ae96b5cd/caregiver/profile", async (c) => {
     };
 
     await kv.set(`cuidador:${auth.user.id}`, cuidadorActualizado);
+    clearAssignedUsersCache();
 
     return c.json({
       success: true,
@@ -1260,6 +1308,7 @@ async function getAssignedUserForCaregiver(cuidadorId: string, usuarioId: string
       cuidador_asignado: cuidadorId,
     };
     await kv.set(`usuario:${usuarioId}`, usuario);
+    clearAssignedUsersCache();
   }
 
   if (!usuariosAsociados.includes(usuarioId)) {
@@ -1267,6 +1316,7 @@ async function getAssignedUserForCaregiver(cuidadorId: string, usuarioId: string
       ...cuidador,
       usuarios_asociados: [...usuariosAsociados, usuarioId],
     });
+    clearAssignedUsersCache();
   }
 
   return usuario;
@@ -1385,6 +1435,7 @@ app.put("/make-server-ae96b5cd/caregiver/users/:id", async (c) => {
     };
 
     await kv.set(`usuario:${usuarioId}`, usuarioActualizado);
+    clearAssignedUsersCache();
 
     return c.json({
       success: true,

@@ -7,10 +7,35 @@ interface ApiOptions {
   body?: any;
   token?: string;
   suppressErrorLog?: boolean;
+  cacheKey?: string;
+  cacheTtlMs?: number;
 }
 
 async function apiCall(endpoint: string, options: ApiOptions = {}) {
-  const { method = 'GET', body, token, suppressErrorLog = false } = options;
+  const {
+    method = 'GET',
+    body,
+    token,
+    suppressErrorLog = false,
+    cacheKey,
+    cacheTtlMs = 0,
+  } = options;
+
+  const fullCacheKey = cacheKey && token ? `vivamente:api:${getUserIdFromToken(token)}:${cacheKey}` : null;
+
+  if (method === 'GET' && fullCacheKey && cacheTtlMs > 0) {
+    try {
+      const cached = localStorage.getItem(fullCacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Date.now() - parsed.timestamp < cacheTtlMs) {
+          return parsed.data;
+        }
+      }
+    } catch {
+      localStorage.removeItem(fullCacheKey);
+    }
+  }
 
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -46,13 +71,29 @@ async function apiCall(endpoint: string, options: ApiOptions = {}) {
       );
     }
 
-    return data ?? {};
+    const safeData = data ?? {};
+
+    if (method === 'GET' && fullCacheKey && cacheTtlMs > 0) {
+      localStorage.setItem(fullCacheKey, JSON.stringify({
+        timestamp: Date.now(),
+        data: safeData,
+      }));
+    }
+
+    return safeData;
   } catch (error) {
     if (!suppressErrorLog) {
       console.error(`API Error [${endpoint}]:`, error);
     }
     throw error;
   }
+}
+
+function clearApiCacheForToken(token: string) {
+  const prefix = `vivamente:api:${getUserIdFromToken(token)}:`;
+  Object.keys(localStorage)
+    .filter((key) => key.startsWith(prefix))
+    .forEach((key) => localStorage.removeItem(key));
 }
 
 // ============================================
@@ -191,17 +232,21 @@ function setLocalFavorites(token: string, favoritos: string[]) {
 
 export const gameApi = {
   saveResult: async (data: GameResultData, token: string) => {
-    return apiCall('/game/result', {
+    const response = await apiCall('/game/result', {
       method: 'POST',
       body: data,
       token,
     });
+    clearApiCacheForToken(token);
+    return response;
   },
 
   getUserStats: async (token: string): Promise<UserStatsResponse> => {
     return apiCall('/user/stats', {
       method: 'GET',
       token,
+      cacheKey: 'user-stats',
+      cacheTtlMs: 60000,
     });
   },
 
@@ -240,9 +285,11 @@ export const gameApi = {
 
       const favoritos = Array.isArray(response.favoritos) ? response.favoritos : nextFavorites;
       setLocalFavorites(token, favoritos);
+      clearApiCacheForToken(token);
       return { success: true, favoritos };
     } catch (error) {
       console.warn("Favorito guardado localmente porque el backend no lo aceptó:", error);
+      clearApiCacheForToken(token);
       return { success: true, favoritos: nextFavorites };
     }
   },
@@ -253,15 +300,19 @@ export const userApi = {
     return apiCall('/user/profile', {
       method: 'GET',
       token,
+      cacheKey: 'user-profile',
+      cacheTtlMs: 60000,
     });
   },
 
   updateAvatar: async (avatar: string, token: string): Promise<UserProfileResponse & { message: string }> => {
-    return apiCall('/user/profile/avatar', {
+    const response = await apiCall('/user/profile/avatar', {
       method: 'PUT',
       body: { avatar },
       token,
     });
+    clearApiCacheForToken(token);
+    return response;
   },
 };
 
@@ -413,6 +464,8 @@ export const caregiverApi = {
     return apiCall('/caregiver/dashboard', {
       method: 'GET',
       token,
+      cacheKey: 'caregiver-dashboard',
+      cacheTtlMs: 60000,
     });
   },
 
@@ -420,6 +473,8 @@ export const caregiverApi = {
     return apiCall('/caregiver/profile', {
       method: 'GET',
       token,
+      cacheKey: 'caregiver-profile',
+      cacheTtlMs: 60000,
     });
   },
 
@@ -427,17 +482,21 @@ export const caregiverApi = {
     data: UpdateCaregiverProfileData,
     token: string,
   ): Promise<CaregiverProfileUpdateResponse> => {
-    return apiCall('/caregiver/profile', {
+    const response = await apiCall('/caregiver/profile', {
       method: 'PUT',
       body: data,
       token,
     });
+    clearApiCacheForToken(token);
+    return response;
   },
 
   getEvolution: async (token: string): Promise<CaregiverEvolutionResponse> => {
     return apiCall('/caregiver/evolution', {
       method: 'GET',
       token,
+      cacheKey: 'caregiver-evolution',
+      cacheTtlMs: 60000,
     });
   },
 
@@ -445,6 +504,8 @@ export const caregiverApi = {
     return apiCall('/caregiver/users', {
       method: 'GET',
       token,
+      cacheKey: 'caregiver-users',
+      cacheTtlMs: 60000,
     });
   },
 
@@ -455,6 +516,8 @@ export const caregiverApi = {
     return apiCall(`/caregiver/users/${userId}`, {
       method: 'GET',
       token,
+      cacheKey: `caregiver-user-${userId}`,
+      cacheTtlMs: 60000,
     });
   },
 
@@ -463,11 +526,13 @@ export const caregiverApi = {
     data: UpdateCaregiverUserData,
     token: string,
   ): Promise<CaregiverManagedUserResponse> => {
-    return apiCall(`/caregiver/users/${userId}`, {
+    const response = await apiCall(`/caregiver/users/${userId}`, {
       method: 'PUT',
       body: data,
       token,
     });
+    clearApiCacheForToken(token);
+    return response;
   },
 };
 
