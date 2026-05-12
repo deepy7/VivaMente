@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
  */
 export default function AuthLayout() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-dvh bg-gray-50 overflow-x-hidden">
       <Outlet />
     </div>
   );

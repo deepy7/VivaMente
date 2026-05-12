@@ -34,30 +34,30 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="flex items-center justify-center px-6 py-12" style={{ minHeight: "100vh" }}>
+    <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-4 sm:py-6">
       <div className="w-full max-w-md">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="flex justify-center mb-4">
-            <Logo size={140} />
+        <div className="text-center mb-4 sm:mb-5">
+          <div className="flex justify-center mb-1.5 sm:mb-2">
+            <Logo size={88} />
           </div>
-          <h1 className="text-4xl mb-3" style={{ fontWeight: 700, color: "#1f2937" }}>
+          <h1 className="text-3xl sm:text-4xl mb-2" style={{ fontWeight: 700, color: "#1f2937" }}>
             Recuperar contraseña
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-base sm:text-lg text-gray-600">
             Introduce tu correo electrónico y te enviaremos instrucciones
           </p>
         </div>
 
         {/* Card */}
         <div
-          className="bg-white rounded-3xl border-2 p-10 shadow-xl"
+          className="bg-white rounded-3xl border-2 p-5 sm:p-6 shadow-xl"
           style={{ borderColor: "#E5ECEC" }}
         >
           {!sent ? (
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Email */}
-              <div className="mb-8">
+              <div className="mb-5">
                 <label
                   htmlFor="email"
                   className="block text-sm mb-2 text-gray-700"
@@ -76,7 +76,7 @@ export default function ForgotPassword() {
                       message: "Formato de email inválido",
                     },
                   })}
-                  className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+                  className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
                   style={{
                     borderColor: errors.email ? "#EF4444" : "#E5ECEC",
                   }}
@@ -91,7 +91,7 @@ export default function ForgotPassword() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full text-white rounded-xl py-4 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mb-8"
+                className="w-full text-white rounded-xl py-3 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mb-5"
                 style={{
                   background: "#12B8B2",
                   fontWeight: 700,
@@ -102,7 +102,7 @@ export default function ForgotPassword() {
               </button>
 
               {/* Volver al inicio - integrado en el recuadro */}
-              <div className="text-center border-t-2 border-gray-100 pt-6">
+              <div className="text-center border-t-2 border-gray-100 pt-4">
                 <Link
                   to="/login"
                   className="text-sm hover:underline"
@@ -113,17 +113,17 @@ export default function ForgotPassword() {
               </div>
             </form>
           ) : (
-            <div className="text-center py-6">
-              <div className="text-6xl mb-6">✉️</div>
-              <p className="text-xl mb-4" style={{ fontWeight: 700, color: "#1f2937" }}>
+            <div className="text-center py-4">
+              <div className="text-5xl mb-3">✉️</div>
+              <p className="text-xl mb-3" style={{ fontWeight: 700, color: "#1f2937" }}>
                 ¡Email enviado!
               </p>
-              <p className="text-base text-gray-600 mb-8">
+              <p className="text-base text-gray-600 mb-5">
                 Revisa tu bandeja de entrada para continuar con la recuperación de tu contraseña.
               </p>
               <Link
                 to="/login"
-                className="inline-block text-white rounded-xl py-3 px-8 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer"
+                className="inline-block text-white rounded-xl py-3 px-6 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer"
                 style={{
                   background: "#12B8B2",
                   fontWeight: 700,

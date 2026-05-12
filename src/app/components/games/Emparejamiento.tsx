@@ -72,21 +72,21 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minHeight: "500px", maxHeight: "600px" }}>
+    <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="max-w-4xl w-full">
         {/* Instrucción clara */}
-        <p className="text-2xl text-gray-800 mb-2 text-center" style={{ fontWeight: 700 }}>
+        <p className="text-xl sm:text-2xl text-gray-800 mb-2 text-center" style={{ fontWeight: 700 }}>
           Une las parejas
         </p>
         
-        <p className="text-lg text-gray-600 mb-6 text-center" style={{ fontWeight: 600 }}>
+        <p className="text-base sm:text-lg text-gray-600 mb-5 sm:mb-6 text-center" style={{ fontWeight: 600 }}>
           Toca uno, después su pareja
         </p>
 
         {/* Grid de emparejamiento */}
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-10">
           {/* Columna izquierda */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {leftItems.map((item, idx) => {
               const isMatched = matched.has(item);
               const isSelected = selectedLeft === item;
@@ -96,7 +96,7 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
                   key={idx}
                   onClick={() => handleLeftClick(item)}
                   disabled={isMatched}
-                  className="w-full p-6 rounded-2xl border-4 text-6xl transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                  className="w-full p-4 sm:p-5 lg:p-6 rounded-2xl border-4 text-4xl sm:text-5xl lg:text-6xl transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                   style={{
                     borderColor: isMatched
                       ? "#12B8B2"
@@ -117,7 +117,7 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
           </div>
 
           {/* Columna derecha */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {rightItems.map((item, idx) => {
               const isMatched = matched.has(item);
 
@@ -126,7 +126,7 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
                   key={idx}
                   onClick={() => handleRightClick(item)}
                   disabled={isMatched || !selectedLeft}
-                  className="w-full p-6 rounded-2xl border-4 text-6xl transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+                  className="w-full p-4 sm:p-5 lg:p-6 rounded-2xl border-4 text-4xl sm:text-5xl lg:text-6xl transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                   style={{
                     borderColor: isMatched ? "#12B8B2" : "#E5ECEC",
                     backgroundColor: isMatched ? "#f0fdf4" : "#ffffff",

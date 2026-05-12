@@ -133,7 +133,7 @@ export default function ProfileCuidador() {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-8 py-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         <div className="rounded-2xl border bg-white p-6 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
           <p style={{ color: "#4B5563" }}>Cargando perfil del cuidador...</p>
         </div>
@@ -142,8 +142,8 @@ export default function ProfileCuidador() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-8 py-10">
-      <div className="mb-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <div className="mb-6 sm:mb-8">
         <h1 className="text-3xl mb-2" style={{ fontWeight: 700, color: "#111827" }}>
           Mi perfil
         </h1>
@@ -168,8 +168,8 @@ export default function ProfileCuidador() {
         </div>
       )}
 
-      <div className="rounded-2xl border bg-white p-8 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
-        <div className="flex flex-col items-center text-center mb-8 pb-8 border-b" style={{ borderColor: "#E5ECEC" }}>
+      <div className="rounded-2xl border bg-white p-5 sm:p-8 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
+        <div className="flex flex-col items-center text-center mb-6 sm:mb-8 pb-6 sm:pb-8 border-b" style={{ borderColor: "#E5ECEC" }}>
           <div className="mb-4">
             <AvatarBadge
               avatarId={caregiver?.avatar}
@@ -190,7 +190,7 @@ export default function ProfileCuidador() {
 
         {!editingProfile ? (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-6 sm:mb-8">
               <div>
                 <label className="block text-xs uppercase mb-2" style={{ color: "#6B7280" }}>Nombre</label>
                 <p className="text-base" style={{ fontWeight: 600, color: "#243B53" }}>
@@ -318,7 +318,7 @@ export default function ProfileCuidador() {
                 <label className="block text-sm text-gray-700 mb-3" style={{ fontWeight: 600 }}>
                   Elige tu avatar
                 </label>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {AVATAR_OPTIONS.map((option) => {
                     const selected = formData.avatar === option.id;
                     return (

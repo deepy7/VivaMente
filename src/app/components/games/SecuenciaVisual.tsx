@@ -81,31 +81,31 @@ export function SecuenciaVisual({ onComplete }: SecuenciaVisualProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minHeight: "500px", maxHeight: "600px" }}>
+    <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="text-center max-w-3xl w-full">
         {/* Progreso simple */}
-        <p className="text-lg text-gray-600 mb-6" style={{ fontWeight: 600 }}>
+        <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6" style={{ fontWeight: 600 }}>
           Secuencia {currentSequence + 1} de {sequences.length}
         </p>
 
         {/* Instrucción MUY clara */}
-        <p className="text-2xl text-gray-800 mb-8" style={{ fontWeight: 700 }}>
+        <p className="text-xl sm:text-2xl text-gray-800 mb-5 sm:mb-8" style={{ fontWeight: 700 }}>
           ¿Qué falta aquí?
         </p>
 
         {/* Secuencia */}
-        <div className="flex justify-center gap-6 mb-8">
+        <div className="flex justify-center gap-3 sm:gap-5 lg:gap-6 mb-6 sm:mb-8">
           {sequence.sequence.map((item, idx) => (
             <div
               key={idx}
-              className="w-32 h-32 rounded-2xl border-4 flex items-center justify-center text-7xl bg-white shadow-lg"
+              className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-2xl border-4 flex items-center justify-center text-4xl sm:text-6xl lg:text-7xl bg-white shadow-lg"
               style={{
                 borderColor: item === "?" ? "#12B8B2" : "#E5ECEC",
                 backgroundColor: item === "?" ? "#EFFCFB" : "#ffffff",
               }}
             >
               {item === "?" ? (
-                <span className="text-5xl" style={{ color: "#12B8B2", fontWeight: 700 }}>
+                <span className="text-3xl sm:text-4xl lg:text-5xl" style={{ color: "#12B8B2", fontWeight: 700 }}>
                   ?
                 </span>
               ) : (
@@ -116,7 +116,7 @@ export function SecuenciaVisual({ onComplete }: SecuenciaVisualProps) {
         </div>
 
         {/* Opciones grandes y simples - solo 3 */}
-        <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-6">
+        <div className="grid grid-cols-3 gap-3 sm:gap-5 lg:gap-6 max-w-2xl mx-auto mb-5 sm:mb-6">
           {sequence.options.map((option, idx) => {
             const isSelected = selectedAnswer === option;
             const isCorrect = option === sequence.correctAnswer;
@@ -128,7 +128,7 @@ export function SecuenciaVisual({ onComplete }: SecuenciaVisualProps) {
                 key={idx}
                 onClick={() => handleAnswerClick(option)}
                 disabled={!!selectedAnswer}
-                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-7xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg"
+                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-4xl sm:text-6xl lg:text-7xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg"
                 style={{
                   borderColor: showCorrect
                     ? "#12B8B2"

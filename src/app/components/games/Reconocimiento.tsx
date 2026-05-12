@@ -92,24 +92,24 @@ export function Reconocimiento({ onComplete }: ReconocimientoProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minHeight: "500px", maxHeight: "600px" }}>
+    <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="text-center max-w-3xl w-full">
-        <p className="text-lg text-gray-600 mb-4" style={{ fontWeight: 600 }}>
+        <p className="text-base sm:text-lg text-gray-600 mb-3 sm:mb-4" style={{ fontWeight: 600 }}>
           Ronda {currentRound + 1} de {rounds.length}
         </p>
 
-        <p className="text-2xl text-gray-800 mb-6" style={{ fontWeight: 700 }}>
+        <p className="text-xl sm:text-2xl text-gray-800 mb-5 sm:mb-6" style={{ fontWeight: 700 }}>
           Encuentra los iguales a este:
         </p>
 
         <div
-          className="w-36 h-36 mx-auto rounded-3xl border-4 flex items-center justify-center text-8xl bg-white shadow-xl mb-6"
+          className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 mx-auto rounded-3xl border-4 flex items-center justify-center text-6xl sm:text-7xl lg:text-8xl bg-white shadow-xl mb-5 sm:mb-6"
           style={{ borderColor: "#12B8B2" }}
         >
           {round.target}
         </div>
 
-        <div className="grid grid-cols-3 gap-5 max-w-2xl mx-auto mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-5 max-w-2xl mx-auto mb-5 sm:mb-6">
           {round.options.map((option, idx) => {
             const isSelected = selectedIndices.includes(idx);
             const isCorrect = round.correctIndices.includes(idx);
@@ -122,7 +122,7 @@ export function Reconocimiento({ onComplete }: ReconocimientoProps) {
                 key={idx}
                 onClick={() => handleClick(idx)}
                 disabled={showFeedback || isDisabled}
-                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-7xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg disabled:opacity-30"
+                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-5xl sm:text-6xl lg:text-7xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg disabled:opacity-30"
                 style={{
                   borderColor: showCorrect
                     ? "#12B8B2"
@@ -153,7 +153,7 @@ export function Reconocimiento({ onComplete }: ReconocimientoProps) {
         <button
           onClick={handleSubmit}
           disabled={selectedIndices.length !== round.correctIndices.length || showFeedback}
-          className="text-white text-xl px-10 py-4 rounded-2xl transition-colors shadow-lg cursor-pointer disabled:cursor-not-allowed"
+          className="text-white text-lg sm:text-xl px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl transition-colors shadow-lg cursor-pointer disabled:cursor-not-allowed"
           style={{
             fontWeight: 700,
             backgroundColor:

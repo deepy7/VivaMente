@@ -219,7 +219,7 @@ function BarComparisonChart({
 
   if (!data.length || !dataKeys.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-gray-200 p-8 text-center">
+        <div className="rounded-2xl border border-dashed border-gray-200 p-5 sm:p-6 text-center">
         <p className="text-sm text-gray-500">Todavía no hay datos suficientes para mostrar esta gráfica.</p>
       </div>
     );
@@ -227,7 +227,7 @@ function BarComparisonChart({
 
   return (
     <div>
-      <div className="h-[320px] w-full">
+      <div className="h-[240px] sm:h-[280px] lg:h-[300px] w-full min-w-0">
         <ResponsiveContainer width="100%" height="100%">
           <RechartsBarChart
             data={data}
@@ -312,7 +312,7 @@ function Last7DaysComparisonChart({
 
   if (!users.length || !hasAnyLast7DaysData(users)) {
     return (
-      <div className="rounded-2xl border border-dashed border-gray-200 p-8 text-center">
+        <div className="rounded-2xl border border-dashed border-gray-200 p-5 sm:p-6 text-center">
         <p className="text-sm text-gray-500">Todavía no hay datos suficientes para mostrar esta gráfica.</p>
       </div>
     );
@@ -320,7 +320,7 @@ function Last7DaysComparisonChart({
 
   return (
     <div>
-      <div className="h-[320px] w-full">
+      <div className="h-[240px] sm:h-[280px] lg:h-[300px] w-full min-w-0">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={last7DaysData} margin={{ top: 12, right: 12, left: 0, bottom: 8 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
@@ -496,8 +496,8 @@ export default function EvolutionCuidador() {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-8 py-10">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="rounded-2xl border bg-white p-5 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
           <p className="text-gray-600">Cargando evolución del cuidador...</p>
         </div>
       </div>
@@ -505,8 +505,8 @@ export default function EvolutionCuidador() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-8 py-10">
-      <div className="mb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div className="mb-5 sm:mb-6">
         <h1 className="text-2xl text-gray-800 mb-1" style={{ fontWeight: 700 }}>
           Evolución de usuarios
         </h1>
@@ -523,8 +523,8 @@ export default function EvolutionCuidador() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 mb-5 sm:mb-6">
+        <div className="rounded-2xl border bg-white p-4 sm:p-5 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
           <div className="flex items-center justify-between mb-3">
             <Users size={22} style={{ color: "#12B8B2" }} />
             <span className="text-xs text-gray-400">Usuarios</span>
@@ -535,7 +535,7 @@ export default function EvolutionCuidador() {
           <p className="text-sm text-gray-500 mt-1">Personas asignadas</p>
         </div>
 
-        <div className="rounded-2xl border bg-white p-6 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
+        <div className="rounded-2xl border bg-white p-4 sm:p-5 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
           <div className="flex items-center justify-between mb-3">
             <Calendar size={22} style={{ color: "#12B8B2" }} />
             <span className="text-xs text-gray-400">Sesiones</span>
@@ -546,7 +546,7 @@ export default function EvolutionCuidador() {
           <p className="text-sm text-gray-500 mt-1">Ejercicios registrados</p>
         </div>
 
-        <div className="rounded-2xl border bg-white p-6 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
+        <div className="rounded-2xl border bg-white p-4 sm:p-5 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
           <div className="flex items-center justify-between mb-3">
             <TrendingUp size={22} style={{ color: "#12B8B2" }} />
             <span className="text-xs text-gray-400">Media</span>
@@ -557,7 +557,7 @@ export default function EvolutionCuidador() {
           <p className="text-sm text-gray-500 mt-1">Puntuación media global</p>
         </div>
 
-        <div className="rounded-2xl border bg-white p-6 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
+        <div className="rounded-2xl border bg-white p-4 sm:p-5 shadow-sm" style={{ borderColor: "#E5ECEC" }}>
           <div className="flex items-center justify-between mb-3">
             <Activity size={22} style={{ color: "#12B8B2" }} />
             <span className="text-xs text-gray-400">Actividad</span>
@@ -569,8 +569,8 @@ export default function EvolutionCuidador() {
         </div>
       </div>
 
-      <div className="rounded-2xl border bg-white shadow-sm overflow-hidden mb-8" style={{ borderColor: "#E5ECEC" }}>
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 px-6 py-5 border-b" style={{ borderColor: "#E5ECEC" }}>
+      <div className="rounded-2xl border bg-white shadow-sm overflow-hidden mb-6" style={{ borderColor: "#E5ECEC" }}>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-4 sm:px-5 py-4 border-b" style={{ borderColor: "#E5ECEC" }}>
           <div className="flex items-center gap-2">
             <BarChart3 size={18} style={{ color: "#12B8B2" }} />
             <h2 className="text-lg text-gray-800" style={{ fontWeight: 700 }}>
@@ -592,8 +592,8 @@ export default function EvolutionCuidador() {
         </div>
 
         <div className="overflow-x-auto">
-          <div className="min-w-[900px]">
-            <div className="grid grid-cols-6 gap-4 px-6 py-3 bg-gray-50 border-b" style={{ borderColor: "#E5ECEC" }}>
+          <div className="min-w-[700px] lg:min-w-[820px]">
+            <div className="grid grid-cols-6 gap-3 px-4 sm:px-5 py-3 bg-gray-50 border-b" style={{ borderColor: "#E5ECEC" }}>
               <p className="text-xs text-gray-500 uppercase" style={{ fontWeight: 600 }}>Usuario</p>
               <p className="text-xs text-gray-500 uppercase" style={{ fontWeight: 600 }}>Última sesión</p>
               <p className="text-xs text-gray-500 uppercase" style={{ fontWeight: 600 }}>Puntuación media</p>
@@ -615,7 +615,7 @@ export default function EvolutionCuidador() {
                   key={usuario.id}
                   type="button"
                   onClick={() => toggleUserSelection(usuario.id)}
-                  className={`w-full grid grid-cols-6 gap-4 px-6 py-4 border-b text-left transition-colors ${
+                  className={`w-full grid grid-cols-6 gap-3 px-4 sm:px-5 py-3.5 border-b text-left transition-colors ${
                     selected ? "bg-[#EFFCFB]" : "hover:bg-gray-50"
                   }`}
                 >
@@ -688,7 +688,7 @@ export default function EvolutionCuidador() {
             })}
 
             {usuarios.length === 0 && (
-              <div className="px-6 py-10 text-center">
+              <div className="px-5 py-8 text-center">
                 <p className="text-gray-500">No hay usuarios con datos de evolución todavía.</p>
               </div>
             )}
@@ -696,16 +696,16 @@ export default function EvolutionCuidador() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 mb-6">
         <div className="rounded-2xl border bg-white shadow-sm overflow-hidden" style={{ borderColor: "#E5ECEC" }}>
-          <div className="flex items-center gap-2 px-6 py-5 border-b" style={{ borderColor: "#E5ECEC" }}>
+          <div className="flex items-center gap-2 px-4 sm:px-5 py-4 border-b" style={{ borderColor: "#E5ECEC" }}>
             <TrendingUp size={18} style={{ color: "#12B8B2" }} />
             <h2 className="text-lg text-gray-800" style={{ fontWeight: 700 }}>
               Evolución últimos 7 días
             </h2>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-5 min-w-0">
             <Last7DaysComparisonChart
               users={usersForComparison}
               selectedUserIds={selectedUserIds}
@@ -714,14 +714,14 @@ export default function EvolutionCuidador() {
         </div>
 
         <div className="rounded-2xl border bg-white shadow-sm overflow-hidden" style={{ borderColor: "#E5ECEC" }}>
-          <div className="flex items-center gap-2 px-6 py-5 border-b" style={{ borderColor: "#E5ECEC" }}>
+          <div className="flex items-center gap-2 px-4 sm:px-5 py-4 border-b" style={{ borderColor: "#E5ECEC" }}>
             <Brain size={18} style={{ color: "#12B8B2" }} />
             <h2 className="text-lg text-gray-800" style={{ fontWeight: 700 }}>
               Rendimiento por tipo de juego
             </h2>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-5 min-w-0">
             <BarComparisonChart
               data={chartData.data}
               mode={chartData.mode}
@@ -733,20 +733,20 @@ export default function EvolutionCuidador() {
 
       {selectedUser && (
         <div className="rounded-2xl border bg-white shadow-sm overflow-hidden" style={{ borderColor: "#E5ECEC" }}>
-          <div className="flex items-center gap-2 px-6 py-5 border-b" style={{ borderColor: "#E5ECEC" }}>
+          <div className="flex items-center gap-2 px-4 sm:px-5 py-4 border-b" style={{ borderColor: "#E5ECEC" }}>
             <Target size={18} style={{ color: "#12B8B2" }} />
             <h2 className="text-lg text-gray-800" style={{ fontWeight: 700 }}>
               Detalle de análisis: {selectedUser.nombre}
             </h2>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-5">
             {selectedUser.statsPorJuego?.length ? (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {selectedUser.statsPorJuego.map((game: any) => (
                   <div
                     key={game.gameId || getGameLabel(game)}
-                    className="rounded-2xl border p-5"
+                    className="rounded-2xl border p-4"
                     style={{ backgroundColor: "#FCFCFC", borderColor: "#E5ECEC" }}
                   >
                     <div className="flex items-center justify-between mb-4">

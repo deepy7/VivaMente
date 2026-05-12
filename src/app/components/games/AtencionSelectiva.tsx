@@ -63,20 +63,20 @@ export function AtencionSelectiva({ onComplete }: AtencionSelectivaProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minHeight: "500px", maxHeight: "600px" }}>
+    <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="text-center max-w-3xl w-full">
         {/* Progreso simple */}
-        <p className="text-lg text-gray-600 mb-6" style={{ fontWeight: 600 }}>
+        <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6" style={{ fontWeight: 600 }}>
           Ronda {currentRound + 1} de {rounds.length}
         </p>
 
         {/* Instrucción clara y simple */}
-        <p className="text-2xl text-gray-800 mb-8" style={{ fontWeight: 700 }}>
+        <p className="text-xl sm:text-2xl text-gray-800 mb-5 sm:mb-8" style={{ fontWeight: 700 }}>
           Encuentra el diferente
         </p>
 
         {/* Grid de elementos - solo 6 elementos en 2 filas */}
-        <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5 lg:gap-6 max-w-2xl mx-auto mb-5 sm:mb-6">
           {round.elements.map((elem, idx) => {
             const isSelected = selectedIndex === idx;
             const isCorrect = idx === round.differentIndex;
@@ -88,7 +88,7 @@ export function AtencionSelectiva({ onComplete }: AtencionSelectivaProps) {
                 key={idx}
                 onClick={() => handleClick(idx)}
                 disabled={selectedIndex !== null}
-                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-7xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg"
+                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-5xl sm:text-6xl lg:text-7xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg"
                 style={{
                   borderColor: showCorrect
                     ? "#12B8B2"

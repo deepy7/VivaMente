@@ -47,20 +47,20 @@ export default function Register() {
   };
 
   return (
-    <div className="flex items-center justify-center px-6 py-12" style={{ minHeight: "100vh" }}>
+    <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-3 sm:py-4">
       <div className="w-full max-w-md">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="flex justify-center mb-4">
-            <Logo size={140} />
+        <div className="text-center mb-3 sm:mb-4">
+          <div className="flex justify-center mb-1">
+            <Logo size={80} />
           </div>
-          <h1 className="text-4xl mb-3" style={{ fontWeight: 700, color: "#1f2937" }}>
+          <h1 className="text-3xl sm:text-4xl mb-1.5" style={{ fontWeight: 700, color: "#1f2937" }}>
             Crear cuenta
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-base sm:text-lg text-gray-600">
             Completa el formulario para registrarte
           </p>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-sm text-gray-500 mt-1.5">
             ¿Ya tienes cuenta?{" "}
             <Link
               to="/login"
@@ -75,15 +75,15 @@ export default function Register() {
         {/* Card de Register */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-3xl border-2 p-10 shadow-xl"
+          className="bg-white rounded-3xl border-2 p-4 sm:p-5 shadow-xl"
           style={{ borderColor: "#E5ECEC" }}
         >
-          <div className="grid grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
             {/* Nombre */}
             <div>
               <label
                 htmlFor="nombre"
-                className="block text-sm mb-2 text-gray-700"
+                className="block text-sm mb-1.5 text-gray-700"
                 style={{ fontWeight: 600 }}
               >
                 Nombre *
@@ -99,7 +99,7 @@ export default function Register() {
                     message: "Mínimo 2 caracteres",
                   },
                 })}
-                className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
                 style={{
                   borderColor: errors.nombre ? "#EF4444" : "#E5ECEC",
                 }}
@@ -115,7 +115,7 @@ export default function Register() {
             <div>
               <label
                 htmlFor="apellidos"
-                className="block text-sm mb-2 text-gray-700"
+                className="block text-sm mb-1.5 text-gray-700"
                 style={{ fontWeight: 600 }}
               >
                 Apellidos *
@@ -131,7 +131,7 @@ export default function Register() {
                     message: "Mínimo 2 caracteres",
                   },
                 })}
-                className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
                 style={{
                   borderColor: errors.apellidos ? "#EF4444" : "#E5ECEC",
                 }}
@@ -145,10 +145,10 @@ export default function Register() {
           </div>
 
           {/* Email */}
-          <div className="mb-6">
+          <div className="mb-3.5">
             <label
               htmlFor="email"
-              className="block text-sm mb-2 text-gray-700"
+              className="block text-sm mb-1.5 text-gray-700"
               style={{ fontWeight: 600 }}
             >
               Correo electrónico *
@@ -164,7 +164,7 @@ export default function Register() {
                   message: "Formato de email inválido",
                 },
               })}
-              className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+              className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
               style={{
                 borderColor: errors.email ? "#EF4444" : "#E5ECEC",
               }}
@@ -176,12 +176,12 @@ export default function Register() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
             {/* Password */}
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm mb-2 text-gray-700"
+                className="block text-sm mb-1.5 text-gray-700"
                 style={{ fontWeight: 600 }}
               >
                 Contraseña *
@@ -197,7 +197,7 @@ export default function Register() {
                     message: "Mínimo 6 caracteres",
                   },
                 })}
-                className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
                 style={{
                   borderColor: errors.password ? "#EF4444" : "#E5ECEC",
                 }}
@@ -213,7 +213,7 @@ export default function Register() {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm mb-2 text-gray-700"
+                className="block text-sm mb-1.5 text-gray-700"
                 style={{ fontWeight: 600 }}
               >
                 Confirmar *
@@ -227,7 +227,7 @@ export default function Register() {
                   validate: (value) =>
                     value === password || "Las contraseñas no coinciden",
                 })}
-                className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
                 style={{
                   borderColor: errors.confirmPassword ? "#EF4444" : "#E5ECEC",
                 }}
@@ -244,7 +244,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full text-white rounded-xl py-4 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mb-8"
+            className="w-full text-white rounded-xl py-2.5 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mb-4"
             style={{
               background: "#12B8B2",
               fontWeight: 700,
@@ -254,7 +254,7 @@ export default function Register() {
           </button>
 
           {/* Volver al inicio - integrado en el recuadro */}
-          <div className="text-center border-t-2 border-gray-100 pt-6">
+          <div className="text-center border-t-2 border-gray-100 pt-3.5">
             <Link
               to="/login"
               className="text-sm hover:underline"

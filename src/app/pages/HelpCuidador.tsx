@@ -105,8 +105,8 @@ export default function HelpCuidador() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8 py-10">
-      <div className="mb-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl mb-1" style={{ fontWeight: 700, color: "#111827" }}>
           Ayuda
         </h1>
@@ -115,9 +115,9 @@ export default function HelpCuidador() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-5 sm:gap-6">
         <div className="rounded-2xl border bg-white shadow-sm overflow-hidden" style={{ borderColor: "#E5ECEC" }}>
-          <div className="px-6 py-5 border-b flex items-center gap-3" style={{ borderColor: "#E5ECEC" }}>
+          <div className="px-5 sm:px-6 py-4 sm:py-5 border-b flex items-center gap-3" style={{ borderColor: "#E5ECEC" }}>
             <div
               className="w-10 h-10 rounded-2xl flex items-center justify-center"
               style={{ backgroundColor: "#EFFCFB" }}
@@ -134,7 +134,7 @@ export default function HelpCuidador() {
             </div>
           </div>
 
-          <div className="p-6 space-y-3">
+          <div className="p-4 sm:p-6 space-y-3">
             {faqs.map((faq) => {
               const isOpen = open === faq.id;
 
@@ -149,7 +149,7 @@ export default function HelpCuidador() {
                 >
                   <button
                     type="button"
-                    className="w-full flex items-center justify-between px-5 py-4 text-left transition-colors hover:bg-[#F3FBFB] cursor-pointer"
+                    className="w-full flex items-center justify-between px-4 sm:px-5 py-4 text-left transition-colors hover:bg-[#F3FBFB] cursor-pointer"
                     onClick={() => setOpen(isOpen ? null : faq.id)}
                   >
                     <span className="text-sm pr-4" style={{ fontWeight: 600, color: "#243B53" }}>
@@ -179,7 +179,7 @@ export default function HelpCuidador() {
         </div>
 
         <div className="rounded-2xl border bg-white shadow-sm overflow-hidden h-fit" style={{ borderColor: "#E5ECEC" }}>
-          <div className="px-6 py-5 border-b flex items-center gap-3" style={{ borderColor: "#E5ECEC" }}>
+          <div className="px-5 sm:px-6 py-4 sm:py-5 border-b flex items-center gap-3" style={{ borderColor: "#E5ECEC" }}>
             <div
               className="w-10 h-10 rounded-2xl flex items-center justify-center"
               style={{ backgroundColor: "#EFFCFB" }}
@@ -196,7 +196,7 @@ export default function HelpCuidador() {
             </div>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <div
               className="rounded-2xl border px-4 py-4 mb-5"
               style={{ backgroundColor: "#F7FAFA", borderColor: "#E5ECEC" }}

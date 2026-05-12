@@ -184,8 +184,8 @@ export default function GestionUsuarios() {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-8 py-10">
-        <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
           <p className="text-gray-600">Cargando usuarios asignados...</p>
         </div>
       </div>
@@ -193,8 +193,8 @@ export default function GestionUsuarios() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-8 py-10">
-      <div className="mb-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div className="mb-5 sm:mb-6">
         <h1 className="text-3xl text-gray-900 mb-2" style={{ fontWeight: 700 }}>
           Gestión de usuarios
         </h1>
@@ -219,20 +219,20 @@ export default function GestionUsuarios() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-5 sm:mb-6">
+        <div className="rounded-2xl border border-gray-100 bg-white p-4 sm:p-5 shadow-sm">
           <p className="text-sm text-gray-500 mb-2">Usuarios asignados</p>
           <p className="text-3xl text-gray-900" style={{ fontWeight: 700 }}>
             {usuarios.length}
           </p>
         </div>
-        <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+        <div className="rounded-2xl border border-gray-100 bg-white p-4 sm:p-5 shadow-sm">
           <p className="text-sm text-gray-500 mb-2">Activos hoy</p>
           <p className="text-3xl text-gray-900" style={{ fontWeight: 700 }}>
             {activosHoy}
           </p>
         </div>
-        <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
+        <div className="rounded-2xl border border-gray-100 bg-white p-4 sm:p-5 shadow-sm">
           <p className="text-sm text-gray-500 mb-2">Progreso medio</p>
           <p className="text-3xl text-gray-900" style={{ fontWeight: 700 }}>
             {usuarios.length > 0
@@ -242,10 +242,10 @@ export default function GestionUsuarios() {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-8">
+      <div className="grid grid-cols-12 gap-5 lg:gap-6">
         <div className="col-span-12 lg:col-span-5">
-          <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-            <div className="flex items-center justify-between gap-4 mb-5">
+          <div className="rounded-2xl border border-gray-100 bg-white p-4 sm:p-5 shadow-sm">
+            <div className="flex items-center justify-between gap-4 mb-4">
               <h2 className="text-xl text-gray-800" style={{ fontWeight: 700 }}>
                 Usuarios asignados
               </h2>
@@ -254,7 +254,7 @@ export default function GestionUsuarios() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3 mb-4">
               <div className="relative">
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
@@ -262,7 +262,7 @@ export default function GestionUsuarios() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Buscar por nombre o email"
-                  className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-3 outline-none focus:border-[#12B8B2]"
+                  className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 outline-none focus:border-[#12B8B2]"
                 />
               </div>
 
@@ -271,7 +271,7 @@ export default function GestionUsuarios() {
                 <select
                   value={orderBy}
                   onChange={(e) => setOrderBy(e.target.value as OrderOption)}
-                  className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-3 outline-none focus:border-[#12B8B2] bg-white"
+                  className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 outline-none focus:border-[#12B8B2] bg-white"
                 >
                   <option value="nombre">Ordenar por nombre</option>
                   <option value="actividad">Ordenar por actividad</option>
@@ -284,7 +284,7 @@ export default function GestionUsuarios() {
                 <p className="text-gray-600">No hay usuarios que coincidan con la búsqueda.</p>
               </div>
             ) : (
-              <div className="space-y-4 max-h-[700px] overflow-auto pr-1">
+              <div className="space-y-3 lg:max-h-[calc(100dvh-22rem)] overflow-auto pr-1">
                 {usuariosFiltrados.map((usuario) => {
                   const isSelected = editingUserId === usuario.id;
                   const estado = getEstadoUsuario(usuario);
@@ -293,7 +293,7 @@ export default function GestionUsuarios() {
                   return (
                     <div
                       key={usuario.id}
-                      className="rounded-2xl border p-5 transition-all hover:shadow-md"
+                      className="rounded-2xl border p-4 transition-all hover:shadow-md"
                       style={{
                         borderColor: isSelected ? "#12B8B2" : "#F3F4F6",
                         backgroundColor: isSelected ? "#F3FBFB" : "#FFFFFF",
@@ -389,7 +389,7 @@ export default function GestionUsuarios() {
                         <button
                           type="button"
                           onClick={() => handleEdit(usuario)}
-                          className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+                          className="shrink-0 flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
                           style={{ fontWeight: 600 }}
                         >
                           <Edit2 size={14} />
@@ -405,9 +405,9 @@ export default function GestionUsuarios() {
         </div>
 
         <div className="col-span-12 lg:col-span-7">
-          <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm min-h-[620px]">
+          <div className="rounded-2xl border border-gray-100 bg-white p-4 sm:p-5 shadow-sm">
             {!selectedUser ? (
-              <div className="h-full flex items-center justify-center text-center">
+              <div className="min-h-[240px] flex items-center justify-center text-center">
                 <div>
                   <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
                     <Edit2 size={24} className="text-gray-400" />
@@ -422,7 +422,7 @@ export default function GestionUsuarios() {
               </div>
             ) : (
               <>
-                <div className="flex items-start justify-between gap-4 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
                   <div>
                     <h2 className="text-xl text-gray-800" style={{ fontWeight: 700 }}>
                       Editar usuario
@@ -435,7 +435,7 @@ export default function GestionUsuarios() {
                   <button
                     type="button"
                     onClick={handleCancel}
-                    className="flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
                     style={{ fontWeight: 600 }}
                   >
                     <X size={14} />
@@ -443,26 +443,26 @@ export default function GestionUsuarios() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
-                  <div className="rounded-xl bg-gray-50 p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                  <div className="rounded-xl bg-gray-50 p-3.5">
                     <p className="text-xs text-gray-500 uppercase mb-1">Estado</p>
                     <p className="text-sm text-gray-800" style={{ fontWeight: 700 }}>
                       {getEstadoUsuario(selectedUser)}
                     </p>
                   </div>
-                  <div className="rounded-xl bg-gray-50 p-4">
+                  <div className="rounded-xl bg-gray-50 p-3.5">
                     <p className="text-xs text-gray-500 uppercase mb-1">Última actividad</p>
                     <p className="text-sm text-gray-800" style={{ fontWeight: 700 }}>
                       {selectedUser.ultimaActividad || "Sin actividad"}
                     </p>
                   </div>
-                  <div className="rounded-xl bg-gray-50 p-4">
+                  <div className="rounded-xl bg-gray-50 p-3.5">
                     <p className="text-xs text-gray-500 uppercase mb-1">Progreso actual</p>
                     <p className="text-sm text-gray-800" style={{ fontWeight: 700 }}>
                       {selectedUser.progreso ?? 0}%
                     </p>
                   </div>
-                  <div className="rounded-xl bg-gray-50 p-4">
+                  <div className="rounded-xl bg-gray-50 p-3.5">
                     <p className="text-xs text-gray-500 uppercase mb-1">Evolución</p>
                     <button
                       type="button"
@@ -476,7 +476,7 @@ export default function GestionUsuarios() {
                   </div>
                 </div>
 
-                <div className="mb-6 rounded-xl bg-gray-50 p-4">
+                <div className="mb-5 rounded-xl bg-gray-50 p-3.5">
                   <div className="mb-3 flex items-center gap-2">
                     <Star size={16} style={{ color: "#12B8B2" }} />
                     <p className="text-xs text-gray-500 uppercase" style={{ fontWeight: 700 }}>
@@ -507,7 +507,7 @@ export default function GestionUsuarios() {
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm text-gray-700 mb-2" style={{ fontWeight: 600 }}>
                       Nombre *
@@ -519,7 +519,7 @@ export default function GestionUsuarios() {
                         name="nombre"
                         value={formData.nombre}
                         onChange={handleChange}
-                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-3 outline-none focus:border-[#12B8B2]"
+                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 outline-none focus:border-[#12B8B2]"
                       />
                     </div>
                   </div>
@@ -533,7 +533,7 @@ export default function GestionUsuarios() {
                       name="apellidos"
                       value={formData.apellidos}
                       onChange={handleChange}
-                      className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-[#12B8B2]"
+                      className="w-full rounded-xl border border-gray-200 px-4 py-2.5 outline-none focus:border-[#12B8B2]"
                     />
                   </div>
 
@@ -548,7 +548,7 @@ export default function GestionUsuarios() {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-3 outline-none focus:border-[#12B8B2]"
+                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 outline-none focus:border-[#12B8B2]"
                       />
                     </div>
                   </div>
@@ -564,7 +564,7 @@ export default function GestionUsuarios() {
                         name="telefono"
                         value={formData.telefono}
                         onChange={handleChange}
-                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-3 outline-none focus:border-[#12B8B2]"
+                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 outline-none focus:border-[#12B8B2]"
                       />
                     </div>
                   </div>
@@ -580,7 +580,7 @@ export default function GestionUsuarios() {
                         name="fecha_nacimiento"
                         value={formData.fecha_nacimiento}
                         onChange={handleChange}
-                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-3 outline-none focus:border-[#12B8B2]"
+                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 outline-none focus:border-[#12B8B2]"
                       />
                     </div>
                   </div>
@@ -595,19 +595,19 @@ export default function GestionUsuarios() {
                         name="observaciones"
                         value={formData.observaciones}
                         onChange={handleChange}
-                        rows={6}
-                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-3 outline-none focus:border-[#12B8B2] resize-none"
+                        rows={5}
+                        className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 outline-none focus:border-[#12B8B2] resize-none"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 flex justify-end">
+                <div className="mt-5 sm:mt-6 flex justify-stretch sm:justify-end">
                   <button
                     type="button"
                     onClick={handleSave}
                     disabled={saving}
-                    className="flex items-center gap-2 rounded-xl px-6 py-3 text-white transition-all disabled:opacity-50 cursor-pointer"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl px-6 py-2.5 text-white transition-all disabled:opacity-50 cursor-pointer"
                     style={{
                       background: "#12B8B2",
                       fontWeight: 700,

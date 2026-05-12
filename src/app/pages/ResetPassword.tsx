@@ -104,10 +104,10 @@ export default function ResetPassword() {
 
   if (checkingSession) {
     return (
-      <div className="flex items-center justify-center px-6 py-12" style={{ minHeight: "100vh" }}>
+      <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-4 sm:py-6">
         <div className="w-full max-w-md text-center">
-          <div className="flex justify-center mb-4">
-            <Logo size={140} />
+          <div className="flex justify-center mb-2">
+            <Logo size={88} />
           </div>
           <p className="text-xl text-gray-600">Comprobando enlace de recuperación...</p>
         </div>
@@ -117,31 +117,31 @@ export default function ResetPassword() {
 
   if (!isRecoverySession) {
     return (
-      <div className="flex items-center justify-center px-6 py-12" style={{ minHeight: "100vh" }}>
+      <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-4 sm:py-6">
         <div className="w-full max-w-md">
-          <div className="text-center mb-10">
-            <div className="flex justify-center mb-4">
-              <Logo size={140} />
+          <div className="text-center mb-4 sm:mb-5">
+            <div className="flex justify-center mb-2">
+              <Logo size={88} />
             </div>
-            <h1 className="text-4xl mb-3" style={{ fontWeight: 700, color: "#1f2937" }}>
+            <h1 className="text-3xl sm:text-4xl mb-2" style={{ fontWeight: 700, color: "#1f2937" }}>
               Enlace no válido
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-base sm:text-lg text-gray-600">
               El enlace de recuperación no es válido o ha caducado.
             </p>
           </div>
 
           <div
-            className="bg-white rounded-3xl border-2 p-10 shadow-xl text-center"
+            className="bg-white rounded-3xl border-2 p-5 sm:p-6 shadow-xl text-center"
             style={{ borderColor: "#E5ECEC" }}
           >
-            <p className="text-base text-gray-600 mb-8">
+            <p className="text-base text-gray-600 mb-5">
               Solicita un nuevo correo de recuperación para volver a intentarlo.
             </p>
 
             <Link
               to="/forgot-password"
-              className="inline-block text-white rounded-xl py-3 px-8 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer"
+              className="inline-block text-white rounded-xl py-3 px-6 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer"
               style={{
                 background: "#12B8B2",
                 fontWeight: 700,
@@ -150,7 +150,7 @@ export default function ResetPassword() {
               Solicitar nuevo enlace
             </Link>
 
-            <div className="text-center border-t-2 border-gray-100 pt-6 mt-8">
+            <div className="text-center border-t-2 border-gray-100 pt-4 mt-5">
               <Link
                 to="/login"
                 className="text-sm hover:underline"
@@ -166,26 +166,26 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="flex items-center justify-center px-6 py-12" style={{ minHeight: "100vh" }}>
+    <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-4 sm:py-6">
       <div className="w-full max-w-md">
-        <div className="text-center mb-10">
-          <div className="flex justify-center mb-4">
-            <Logo size={140} />
+        <div className="text-center mb-4 sm:mb-5">
+          <div className="flex justify-center mb-2">
+            <Logo size={88} />
           </div>
-          <h1 className="text-4xl mb-3" style={{ fontWeight: 700, color: "#1f2937" }}>
+          <h1 className="text-3xl sm:text-4xl mb-2" style={{ fontWeight: 700, color: "#1f2937" }}>
             Restablecer contraseña
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-base sm:text-lg text-gray-600">
             Introduce tu nueva contraseña para continuar
           </p>
         </div>
 
         <div
-          className="bg-white rounded-3xl border-2 p-10 shadow-xl"
+          className="bg-white rounded-3xl border-2 p-5 sm:p-6 shadow-xl"
           style={{ borderColor: "#E5ECEC" }}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-6">
+            <div className="mb-4">
               <label
                 htmlFor="password"
                 className="block text-sm mb-2 text-gray-700"
@@ -204,7 +204,7 @@ export default function ResetPassword() {
                     message: "La contraseña debe tener al menos 6 caracteres",
                   },
                 })}
-                className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
                 style={{
                   borderColor: errors.password ? "#EF4444" : "#E5ECEC",
                 }}
@@ -220,7 +220,7 @@ export default function ResetPassword() {
               )}
             </div>
 
-            <div className="mb-8">
+            <div className="mb-5">
               <label
                 htmlFor="confirmPassword"
                 className="block text-sm mb-2 text-gray-700"
@@ -237,7 +237,7 @@ export default function ResetPassword() {
                   validate: (value) =>
                     value === passwordValue || "Las contraseñas no coinciden",
                 })}
-                className="w-full border-2 rounded-xl px-4 py-3.5 text-base text-gray-700 outline-none transition-colors bg-white"
+                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
                 style={{
                   borderColor: errors.confirmPassword ? "#EF4444" : "#E5ECEC",
                 }}
@@ -256,7 +256,7 @@ export default function ResetPassword() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full text-white rounded-xl py-4 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full text-white rounded-xl py-3 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 background: "#12B8B2",
                 fontWeight: 700,

@@ -80,28 +80,28 @@ export function Asociacion({ onComplete }: AsociacionProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minHeight: "500px", maxHeight: "600px" }}>
+    <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="text-center max-w-3xl w-full">
         {/* Progreso simple */}
-        <p className="text-lg text-gray-600 mb-6" style={{ fontWeight: 600 }}>
+        <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6" style={{ fontWeight: 600 }}>
           Pregunta {currentQuestion + 1} de {questions.length}
         </p>
 
         {/* Instrucción clara */}
-        <p className="text-2xl text-gray-800 mb-6" style={{ fontWeight: 700 }}>
+        <p className="text-xl sm:text-2xl text-gray-800 mb-5 sm:mb-6" style={{ fontWeight: 700 }}>
           ¿Qué es esto?
         </p>
 
         {/* Imagen grande */}
         <div
-          className="w-48 h-48 mx-auto rounded-3xl border-4 flex items-center justify-center text-8xl bg-white shadow-xl mb-8"
+          className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto rounded-3xl border-4 flex items-center justify-center text-6xl sm:text-7xl lg:text-8xl bg-white shadow-xl mb-6 sm:mb-8"
           style={{ borderColor: "#12B8B2" }}
         >
           {question.image}
         </div>
 
         {/* Opciones grandes */}
-        <div className="grid grid-cols-3 gap-5 max-w-2xl mx-auto mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 max-w-2xl mx-auto mb-5 sm:mb-6">
           {question.options.map((word, idx) => {
             const isSelected = selectedWord === word;
             const isCorrect = word === question.correctWord;
@@ -113,7 +113,7 @@ export function Asociacion({ onComplete }: AsociacionProps) {
                 key={idx}
                 onClick={() => handleWordClick(word)}
                 disabled={!!selectedWord}
-                className="p-6 rounded-2xl border-4 text-2xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg text-gray-800"
+                className="p-4 sm:p-5 lg:p-6 rounded-2xl border-4 text-xl sm:text-2xl transition-all hover:scale-105 disabled:cursor-not-allowed shadow-lg text-gray-800"
                 style={{
                   borderColor: showCorrect
                     ? "#12B8B2"

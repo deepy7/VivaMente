@@ -27,25 +27,25 @@ export function Navbar() {
 
   return (
     <header className="w-full bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/95">
-      <div className="max-w-6xl mx-auto px-8 h-20 flex items-center gap-10">
-        <Link to="/inicio" className="flex items-center gap-3 shrink-0 group">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 sm:min-h-[4.5rem] flex flex-wrap sm:flex-nowrap items-center gap-x-4 gap-y-2 py-2">
+        <Link to="/inicio" className="flex items-center gap-2 sm:gap-3 shrink-0 group">
           <div className="transition-transform group-hover:scale-110">
-            <Logo size={56} />
+            <Logo size={48} />
           </div>
-          <div>
+          <div className="min-w-0">
             <span
-              className="text-lg text-gray-900 block leading-tight"
+              className="text-base sm:text-lg text-gray-900 block leading-tight"
               style={{ fontWeight: 700, letterSpacing: "0.02em" }}
             >
               VivaMente
             </span>
-            <span className="text-xs text-gray-400 uppercase tracking-wider">
+            <span className="hidden sm:block text-xs text-gray-400 uppercase tracking-wider">
               Ejercicios cognitivos
             </span>
           </div>
         </Link>
 
-        <nav className="flex items-center gap-8 ml-auto">
+        <nav className="order-3 w-full sm:order-none sm:w-auto flex flex-wrap items-center gap-x-4 gap-y-2 sm:gap-x-6 lg:gap-x-8 sm:ml-auto">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
 
@@ -53,7 +53,7 @@ export function Navbar() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="relative pb-1 text-base transition-colors group"
+                className="relative shrink-0 pb-1 text-sm sm:text-base transition-colors group"
                 style={{ color: isActive ? "#111" : "#9ca3af" }}
               >
                 <span style={{ fontWeight: isActive ? 700 : 500 }}>{item.label}</span>
@@ -76,7 +76,7 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="ml-4">
+        <div className="ml-auto sm:ml-2 lg:ml-4 shrink-0">
           <Link to={profilePath} aria-label="Ir al perfil">
             <div
               className="hover:scale-110 transition-transform"

@@ -70,23 +70,23 @@ export function MemoriaVisual({ onComplete }: MemoriaVisualProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minHeight: "500px", maxHeight: "600px" }}>
+    <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       {phase === "study" && (
         <div className="text-center">
           <div className="mb-6">
-            <p className="text-2xl text-gray-800 mb-3" style={{ fontWeight: 700 }}>
+            <p className="text-xl sm:text-2xl text-gray-800 mb-3" style={{ fontWeight: 700 }}>
               Memoriza estas imágenes
             </p>
-            <p className="text-5xl" style={{ fontWeight: 700, color: "#12B8B2" }}>
+            <p className="text-4xl sm:text-5xl" style={{ fontWeight: 700, color: "#12B8B2" }}>
               {timeLeft}s
             </p>
           </div>
 
-          <div className="grid grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 lg:gap-6 max-w-4xl mx-auto">
             {targetImages.map((img, idx) => (
               <div
                 key={idx}
-                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-8xl bg-white shadow-lg"
+                className="aspect-square rounded-2xl border-4 flex items-center justify-center text-5xl sm:text-6xl lg:text-8xl bg-white shadow-lg"
                 style={{ borderColor: "#12B8B2" }}
               >
                 {img}
@@ -98,7 +98,7 @@ export function MemoriaVisual({ onComplete }: MemoriaVisualProps) {
 
       {phase === "test" && (
         <div className="text-center w-full">
-          <p className="text-2xl text-gray-800 mb-2" style={{ fontWeight: 700 }}>
+          <p className="text-xl sm:text-2xl text-gray-800 mb-2" style={{ fontWeight: 700 }}>
             Selecciona las que viste
           </p>
 
@@ -106,7 +106,7 @@ export function MemoriaVisual({ onComplete }: MemoriaVisualProps) {
             {selectedImages.length} / {targetImages.length}
           </p>
 
-          <div className="grid grid-cols-4 gap-5 max-w-4xl mx-auto mb-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 lg:gap-5 max-w-4xl mx-auto mb-5 sm:mb-6">
             {allOptions.map((img, idx) => {
               const isSelected = selectedImages.includes(img);
               const isDisabled = !isSelected && selectedImages.length >= targetImages.length;
@@ -116,7 +116,7 @@ export function MemoriaVisual({ onComplete }: MemoriaVisualProps) {
                   key={idx}
                   onClick={() => handleImageClick(img)}
                   disabled={isDisabled}
-                  className="aspect-square rounded-2xl border-4 flex items-center justify-center text-7xl transition-all hover:scale-105 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="aspect-square rounded-2xl border-4 flex items-center justify-center text-5xl sm:text-6xl lg:text-7xl transition-all hover:scale-105 shadow-lg disabled:opacity-30 disabled:cursor-not-allowed"
                   style={{
                     borderColor: isSelected ? "#12B8B2" : "#12B8B2",
                     backgroundColor: isSelected ? "#f0fdf4" : "#ffffff",
@@ -131,7 +131,7 @@ export function MemoriaVisual({ onComplete }: MemoriaVisualProps) {
           <button
             onClick={handleSubmit}
             disabled={selectedImages.length !== targetImages.length}
-            className="text-white text-xl px-10 py-4 rounded-2xl transition-colors shadow-lg cursor-pointer disabled:cursor-not-allowed"
+            className="text-white text-lg sm:text-xl px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl transition-colors shadow-lg cursor-pointer disabled:cursor-not-allowed"
             style={{
               fontWeight: 700,
               backgroundColor:

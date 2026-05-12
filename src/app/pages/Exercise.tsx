@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router";
-import { ArrowLeft, Trophy } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { MemoriaVisual } from "../components/games/MemoriaVisual";
 import { Asociacion } from "../components/games/Asociacion";
 import { AtencionSelectiva } from "../components/games/AtencionSelectiva";
@@ -24,11 +24,11 @@ export default function Exercise() {
 
   if (!game) {
     return (
-      <div className="max-w-4xl mx-auto px-8 py-12 text-center">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 text-center">
         <p className="text-2xl text-gray-700">Juego no encontrado</p>
         <button
           onClick={() => navigate("/juegos")}
-          className="mt-8 px-8 py-4 bg-gray-900 text-white rounded-2xl text-xl"
+          className="mt-6 px-6 sm:px-8 py-3.5 sm:py-4 bg-gray-900 text-white rounded-2xl text-lg sm:text-xl"
           style={{ fontWeight: 700 }}
         >
           Volver a juegos
@@ -67,31 +67,31 @@ export default function Exercise() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8 py-12">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 lg:py-8">
       {/* Header mejorado */}
       <div
-        className="rounded-3xl border-2 bg-white px-12 py-10 shadow-xl"
+        className="rounded-3xl border-2 bg-white px-5 sm:px-7 lg:px-8 py-5 sm:py-6 lg:py-7 shadow-xl"
         style={{ borderColor: "#E5ECEC" }}
       >
         {/* Header mejorado */}
-        <div className="flex items-center justify-between mb-10">
-          <div className="flex items-center gap-6">
-            <span className="text-7xl">{game.icon}</span>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 sm:mb-5 lg:mb-6">
+          <div className="flex items-center gap-4 sm:gap-6 min-w-0">
+            <span className="text-5xl sm:text-6xl shrink-0">{game.icon}</span>
             <div>
               <p
-                className="text-2xl tracking-wide uppercase"
+                className="text-xl sm:text-2xl tracking-wide uppercase"
                 style={{ color: "#12B8B2", fontWeight: 700 }}
               >
                 {game.title}
               </p>
-              <p className="text-base text-gray-500 mt-2">
+              <p className="text-base text-gray-500 mt-1">
                 Completa el ejercicio para obtener tu puntuación
               </p>
             </div>
           </div>
           <button
             onClick={() => navigate("/juegos")}
-            className="flex items-center gap-2 px-6 py-3 border-2 hover:bg-gray-50 rounded-xl text-base transition-colors text-gray-700 cursor-pointer"
+            className="flex items-center justify-center gap-2 px-5 sm:px-6 py-3 border-2 hover:bg-gray-50 rounded-xl text-base transition-colors text-gray-700 cursor-pointer"
             style={{ borderColor: "#12B8B2", fontWeight: 600 }}
           >
             <ArrowLeft size={20} />
@@ -100,10 +100,10 @@ export default function Exercise() {
         </div>
 
         {/* Divisor */}
-        <div className="border-t-2 border-gray-100 mb-10"></div>
+        <div className="border-t-2 border-gray-100 mb-4 sm:mb-5 lg:mb-6"></div>
 
         {/* Game Component */}
-        <div className="py-6">
+        <div className="py-1 sm:py-2">
           <GameComponent onComplete={handleComplete} />
         </div>
       </div>
