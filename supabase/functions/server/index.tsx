@@ -11,6 +11,14 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
 );
 
+const RESEND_API_URL = "https://api.resend.com/emails";
+const RESEND_FROM_EMAIL = Deno.env.get("RESEND_FROM_EMAIL") ?? "Vivamente <onboarding@resend.dev>";
+const RESEND_SUPPORT_EMAIL =
+  Deno.env.get("RESEND_SUPPORT_EMAIL") ??
+  Deno.env.get("RESEND_TO_EMAIL") ??
+  Deno.env.get("SUPPORT_EMAIL") ??
+  "";
+
 const GAME_NAMES: Record<string, string> = {
   "memoria-visual": "Memoria Visual",
   asociacion: "Asociación",
@@ -341,6 +349,15 @@ function formatRelativeActivity(fechaISO?: string | null) {
   }
 
   return `Hace ${diffDays} días`;
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 async function syncAuthUsersToKV() {
@@ -1269,6 +1286,96 @@ app.get("/make-server-ae96b5cd/caregiver/evolution", async (c) => {
 // ============================================
 // GESTIÓN DE USUARIOS DEL CUIDADOR
 // ============================================
+
+app.post("/make-server-ae96b5cd/caregiver/help", async (c) => {
+  try {
+    const guard = await requireCaregiver(c);
+    if (!guard.ok) return guard.response;
+
+    const body = await c.req.json();
+    const asunto = typeof body?.asunto === "string" ? body.asunto.trim() : "";
+    const mensaje = typeof body?.mensaje === "string" ? body.mensaje.trim() : "";
+
+    if (!asunto || !mensaje) {
+      return c.json({ error: "Debes completar el asunto y el mensaje." }, 400);
+    }
+
+    if (asunto.length < 4) {
+      return c.json({ error: "El asunto debe tener al menos 4 caracteres." }, 400);
+    }
+
+    if (mensaje.length < 10) {
+      return c.json({ error: "El mensaje debe tener al menos 10 caracteres." }, 400);
+    }
+
+    const resendApiKey = Deno.env.get("RESEND_API_KEY") ?? "";
+
+    if (!resendApiKey || !RESEND_SUPPORT_EMAIL) {
+      console.error("Resend no configurado para el formulario de ayuda del cuidador");
+      return c.json({ error: "Servicio de correo no configurado" }, 500);
+    }
+
+    const auth = guard.auth;
+    const cuidador = await getRoleData(auth.user.id, "cuidador");
+    const nombreCuidador = `${cuidador?.nombre || auth.user.user_metadata?.nombre || ""} ${
+      cuidador?.apellidos || auth.user.user_metadata?.apellidos || ""
+    }`.trim();
+    const emailCuidador = auth.user.email || cuidador?.email || "";
+    const safeAsunto = escapeHtml(asunto);
+    const safeMensaje = escapeHtml(mensaje).replace(/\n/g, "<br />");
+    const safeNombre = escapeHtml(nombreCuidador || "Cuidador");
+    const safeEmail = escapeHtml(emailCuidador || "Email no disponible");
+
+    const emailPayload: Record<string, any> = {
+      from: RESEND_FROM_EMAIL,
+      to: [RESEND_SUPPORT_EMAIL],
+      subject: `[Vivamente] ${asunto}`,
+      html: `
+        <h2>Nueva consulta de ayuda del cuidador</h2>
+        <p><strong>Cuidador:</strong> ${safeNombre}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>Asunto:</strong> ${safeAsunto}</p>
+        <p><strong>Mensaje:</strong></p>
+        <p>${safeMensaje}</p>
+      `,
+      text: [
+        "Nueva consulta de ayuda del cuidador",
+        `Cuidador: ${nombreCuidador || "Cuidador"}`,
+        `Email: ${emailCuidador || "Email no disponible"}`,
+        `Asunto: ${asunto}`,
+        "",
+        mensaje,
+      ].join("\n"),
+    };
+
+    if (emailCuidador) {
+      emailPayload.reply_to = emailCuidador;
+    }
+
+    const resendResponse = await fetch(RESEND_API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emailPayload),
+    });
+
+    if (!resendResponse.ok) {
+      const errorText = await resendResponse.text();
+      console.error("Error enviando email con Resend:", errorText);
+      return c.json({ error: "No se pudo enviar el mensaje. Intentalo de nuevo." }, 502);
+    }
+
+    return c.json({
+      success: true,
+      message: "Mensaje enviado correctamente",
+    });
+  } catch (error) {
+    console.error("Error en ayuda del cuidador:", error);
+    return c.json({ error: "Error interno del servidor" }, 500);
+  }
+});
 
 async function getAssignedUserForCaregiver(cuidadorId: string, usuarioId: string) {
   const cuidador = await kv.get(`cuidador:${cuidadorId}`);

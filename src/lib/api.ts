@@ -459,7 +459,28 @@ export interface CaregiverProfileUpdateResponse {
   message: string;
 }
 
+export interface CaregiverHelpMessageData {
+  asunto: string;
+  mensaje: string;
+}
+
+export interface CaregiverHelpMessageResponse {
+  success: boolean;
+  message: string;
+}
+
 export const caregiverApi = {
+  sendHelpMessage: async (
+    data: CaregiverHelpMessageData,
+    token: string,
+  ): Promise<CaregiverHelpMessageResponse> => {
+    return apiCall('/caregiver/help', {
+      method: 'POST',
+      body: data,
+      token,
+    });
+  },
+
   getDashboard: async (token: string): Promise<CaregiverDashboardResponse> => {
     return apiCall('/caregiver/dashboard', {
       method: 'GET',
