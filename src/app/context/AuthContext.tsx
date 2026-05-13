@@ -114,10 +114,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch (error) {
         console.error("Error verificando sesión:", error);
 
-        // IMPORTANTE:
-        // No limpiamos la sesión inmediatamente si ya había datos locales,
-        // para evitar expulsar al usuario por un fallo puntual al recargar.
-        // Para este TFG es mejor priorizar estabilidad de navegación.
       } finally {
         setIsLoading(false);
       }
