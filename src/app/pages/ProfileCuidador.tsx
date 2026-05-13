@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { User, LogOut, Settings, Save, X } from "lucide-react";
 import {
@@ -25,8 +25,6 @@ export default function ProfileCuidador() {
     apellidos: "",
     email: "",
     avatar: "avatar-1",
-    especialidad: "",
-    experiencia: 0,
   });
 
   useEffect(() => {
@@ -45,8 +43,6 @@ export default function ProfileCuidador() {
           apellidos: response.caregiver.apellidos || "",
           email: response.caregiver.email || "",
           avatar: response.caregiver.avatar || "avatar-1",
-          especialidad: response.caregiver.especialidad || "",
-          experiencia: response.caregiver.experiencia || 0,
         });
       } catch (err: any) {
         console.error("Error cargando perfil del cuidador:", err);
@@ -61,13 +57,6 @@ export default function ProfileCuidador() {
 
   const caregiver = profile?.caregiver;
 
-  const experienceLabel = useMemo(() => {
-    const years = caregiver?.experiencia ?? 0;
-    if (!years) return "No especificada";
-    if (years === 1) return "1 año";
-    return `${years} años`;
-  }, [caregiver?.experiencia]);
-
   const handleLogout = async () => {
     await logout();
     navigate("/login");
@@ -77,7 +66,7 @@ export default function ProfileCuidador() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "experiencia" ? Number(value) : value,
+      [name]: value,
     }));
   };
 
@@ -94,8 +83,6 @@ export default function ProfileCuidador() {
         apellidos: caregiver.apellidos || "",
         email: caregiver.email || "",
         avatar: caregiver.avatar || "avatar-1",
-        especialidad: caregiver.especialidad || "",
-        experiencia: caregiver.experiencia || 0,
       });
     }
     setError("");
@@ -109,7 +96,14 @@ export default function ProfileCuidador() {
       setError("");
       setSuccessMessage("");
 
-      const response = await caregiverApi.updateProfile(formData, accessToken);
+      const response = await caregiverApi.updateProfile(
+        {
+          ...formData,
+          especialidad: caregiver?.especialidad,
+          experiencia: caregiver?.experiencia,
+        },
+        accessToken,
+      );
 
       if (response.success && caregiver) {
         setProfile({
@@ -226,20 +220,6 @@ export default function ProfileCuidador() {
               </div>
 
               <div>
-                <label className="block text-xs uppercase mb-2" style={{ color: "#6B7280" }}>Especialidad</label>
-                <p className="text-base" style={{ fontWeight: 600, color: "#243B53" }}>
-                  {caregiver?.especialidad || "No especificada"}
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase mb-2" style={{ color: "#6B7280" }}>Experiencia</label>
-                <p className="text-base" style={{ fontWeight: 600, color: "#243B53" }}>
-                  {experienceLabel}
-                </p>
-              </div>
-
-              <div>
                 <label className="block text-xs uppercase mb-2" style={{ color: "#6B7280" }}>Usuarios asignados</label>
                 <p className="text-base" style={{ fontWeight: 600, color: "#243B53" }}>
                   {caregiver?.usuarios_asociados ?? 0}
@@ -345,32 +325,6 @@ export default function ProfileCuidador() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm mb-2" style={{ fontWeight: 600, color: "#243B53" }}>
-                  Especialidad
-                </label>
-                <input
-                  type="text"
-                  name="especialidad"
-                  value={formData.especialidad || ""}
-                  onChange={handleProfileChange}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-[#12B8B2]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm mb-2" style={{ fontWeight: 600, color: "#243B53" }}>
-                  Experiencia (años)
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  name="experiencia"
-                  value={formData.experiencia ?? 0}
-                  onChange={handleProfileChange}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-[#12B8B2]"
-                />
-              </div>
             </div>
 
             <div className="flex flex-col sm:flex-col gap-4">

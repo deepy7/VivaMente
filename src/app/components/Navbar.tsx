@@ -15,6 +15,7 @@ export function Navbar() {
     userRole === "cuidador"
       ? [
           { label: "Inicio", path: "/inicio" },
+          { label: "Usuarios", path: "/gestion-usuarios" },
           { label: "Evolución", path: evolutionPath },
           { label: "Ayuda", path: helpPath },
         ]

@@ -155,7 +155,7 @@ export default function HomeCuidador() {
                 Gestionar usuarios
               </h3>
               <p className="text-gray-600">
-                Consulta, busca y edita los datos de los usuarios que ya tienes asignados
+                Consulta, busca y edita los usuarios que tienes asignados
               </p>
             </Link>
 

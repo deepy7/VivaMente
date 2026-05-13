@@ -10,23 +10,23 @@ import { useAuth } from "../context/AuthContext";
 const faqs = [
   {
     id: 1,
+    q: "¿Cómo gestiono los usuarios asignados?",
+    a: "Desde la sección Usuarios puedes consultar las personas que tienes asignadas, revisar sus datos principales y acceder a su evolución individual.",
+  },
+  {
+    id: 2,
     q: "¿Cómo consulto la evolución de mis usuarios?",
     a: "Desde la sección Evolución puedes revisar el rendimiento general, la comparativa entre usuarios y el detalle individual cuando seleccionas una única persona.",
   },
   {
-    id: 2,
+    id: 3,
     q: "¿Qué significa el cambio vs última sesión?",
     a: "Indica la diferencia entre la puntuación media del último día en que el usuario jugó y la del día anterior en que también tuvo actividad.",
   },
   {
-    id: 3,
-    q: "¿Cómo marco juegos favoritos?",
-    a: "En la pantalla de Juegos puedes pulsar la estrella de cada actividad. Después aparecerán en la sección de favoritos dentro de Evolución del usuario.",
-  },
-  {
     id: 4,
-    q: "¿Dónde cambio el avatar del perfil?",
-    a: "Puedes cambiarlo desde tu perfil y también desde el perfil del usuario. El avatar seleccionado se guarda y se mantiene al volver a entrar.",
+    q: "¿Cómo consulto los juegos favoritos de un usuario?",
+    a: "Desde la sección Usuarios puedes ver los juegos favoritos marcados por cada persona asignada. Esta información te ayuda a conocer qué actividades utiliza con más frecuencia o prefiere realizar.",
   },
   {
     id: 5,
@@ -41,8 +41,8 @@ const faqs = [
 ];
 
 export default function HelpCuidador() {
-  const { accessToken, user } = useAuth();
-  const [open, setOpen] = useState<number | null>(1);
+  const { accessToken } = useAuth();
+  const [open, setOpen] = useState<number | null>(null);
   const [asunto, setAsunto] = useState("");
   const [mensaje, setMensaje] = useState("");
   const [sending, setSending] = useState(false);
@@ -203,9 +203,6 @@ export default function HelpCuidador() {
             >
               <p className="text-sm text-gray-600 leading-relaxed">
                 Usa este formulario para incidencias, dudas funcionales o cualquier problema con la aplicación.
-              </p>
-              <p className="text-xs mt-2" style={{ color: "#6B7280" }}>
-                Se enviará desde la cuenta del cuidador conectado{user?.email ? ` (${user.email})` : ""}.
               </p>
             </div>
 
