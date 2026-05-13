@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { Logo } from "../components/Logo";
+import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "sonner";
 
@@ -50,6 +51,7 @@ export default function Login() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
+          noValidate
           className="bg-white rounded-3xl border-2 p-5 sm:p-6 shadow-xl"
           style={{ borderColor: "#E5ECEC" }}
         >
@@ -68,8 +70,8 @@ export default function Login() {
               {...register("email", {
                 required: "El email es obligatorio",
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Formato de email inválido",
+                  value: /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/,
+                  message: "Introduce un correo electrónico válido",
                 },
               })}
               className="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
@@ -90,23 +92,13 @@ export default function Login() {
             >
               Contraseña *
             </label>
-            <input
+            <PasswordInput
               id="password"
-              type="password"
               placeholder="••••••••"
+              hasError={Boolean(errors.password)}
               {...register("password", {
                 required: "La contraseña es obligatoria",
               })}
-              className="w-full border-2 border-gray-200 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
-              style={{
-                borderColor: errors.password ? "#EF4444" : "#E5ECEC",
-              }}
-              onFocus={(e) =>
-                (e.target.style.borderColor = errors.password ? "#EF4444" : "#12B8B2")
-              }
-              onBlur={(e) =>
-                (e.target.style.borderColor = errors.password ? "#EF4444" : "#E5ECEC")
-              }
             />
             {errors.password && (
               <p className="text-sm text-red-500 mt-2">{errors.password.message}</p>

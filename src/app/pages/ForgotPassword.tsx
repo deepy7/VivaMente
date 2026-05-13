@@ -55,7 +55,7 @@ export default function ForgotPassword() {
           style={{ borderColor: "#E5ECEC" }}
         >
           {!sent ? (
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
               {/* Email */}
               <div className="mb-5">
                 <label
@@ -72,8 +72,8 @@ export default function ForgotPassword() {
                   {...register("email", {
                     required: "El email es obligatorio",
                     pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Formato de email inválido",
+                      value: /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/,
+                      message: "Introduce un correo electrónico válido",
                     },
                   })}
                   className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"

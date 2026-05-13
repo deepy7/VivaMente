@@ -2,6 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { Logo } from "../components/Logo";
+import {
+  getPasswordValidationMessage,
+  isPasswordValid,
+  PasswordInput,
+  PasswordStrengthHint,
+} from "../components/PasswordInput";
 import { authApi } from "../../lib/api";
 import { toast } from "sonner";
 
@@ -24,7 +30,7 @@ export default function Register() {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
-  const password = watch("password");
+  const password = watch("password") || "";
 
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
@@ -49,7 +55,6 @@ export default function Register() {
   return (
     <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-3 sm:py-4">
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="text-center mb-3 sm:mb-4">
           <div className="flex justify-center mb-1">
             <Logo size={80} />
@@ -72,14 +77,13 @@ export default function Register() {
           </p>
         </div>
 
-        {/* Card de Register */}
         <form
           onSubmit={handleSubmit(onSubmit)}
+          noValidate
           className="bg-white rounded-3xl border-2 p-4 sm:p-5 shadow-xl"
           style={{ borderColor: "#E5ECEC" }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
-            {/* Nombre */}
             <div>
               <label
                 htmlFor="nombre"
@@ -111,7 +115,6 @@ export default function Register() {
               )}
             </div>
 
-            {/* Apellidos */}
             <div>
               <label
                 htmlFor="apellidos"
@@ -144,7 +147,6 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Email */}
           <div className="mb-3.5">
             <label
               htmlFor="email"
@@ -160,8 +162,8 @@ export default function Register() {
               {...register("email", {
                 required: "El email es obligatorio",
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Formato de email inválido",
+                  value: /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/,
+                  message: "Introduce un correo electrónico válido",
                 },
               })}
               className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
@@ -177,7 +179,6 @@ export default function Register() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
-            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -186,30 +187,20 @@ export default function Register() {
               >
                 Contraseña *
               </label>
-              <input
+              <PasswordInput
                 id="password"
-                type="password"
                 placeholder="••••••••"
+                hasError={Boolean(errors.password)}
                 {...register("password", {
                   required: "La contraseña es obligatoria",
-                  minLength: {
-                    value: 6,
-                    message: "Mínimo 6 caracteres",
-                  },
+                  validate: (value) => isPasswordValid(value) || getPasswordValidationMessage(),
                 })}
-                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
-                style={{
-                  borderColor: errors.password ? "#EF4444" : "#E5ECEC",
-                }}
-                onFocus={(e) => (e.target.style.borderColor = errors.password ? "#EF4444" : "#12B8B2")}
-                onBlur={(e) => (e.target.style.borderColor = errors.password ? "#EF4444" : "#E5ECEC")}
               />
               {errors.password && (
                 <p className="text-sm text-red-500 mt-2">{errors.password.message}</p>
               )}
             </div>
 
-            {/* Confirm Password */}
             <div>
               <label
                 htmlFor="confirmPassword"
@@ -218,29 +209,26 @@ export default function Register() {
               >
                 Confirmar *
               </label>
-              <input
+              <PasswordInput
                 id="confirmPassword"
-                type="password"
                 placeholder="••••••••"
+                hasError={Boolean(errors.confirmPassword)}
                 {...register("confirmPassword", {
                   required: "Confirma tu contraseña",
                   validate: (value) =>
                     value === password || "Las contraseñas no coinciden",
                 })}
-                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
-                style={{
-                  borderColor: errors.confirmPassword ? "#EF4444" : "#E5ECEC",
-                }}
-                onFocus={(e) => (e.target.style.borderColor = errors.confirmPassword ? "#EF4444" : "#12B8B2")}
-                onBlur={(e) => (e.target.style.borderColor = errors.confirmPassword ? "#EF4444" : "#E5ECEC")}
               />
               {errors.confirmPassword && (
                 <p className="text-sm text-red-500 mt-2">{errors.confirmPassword.message}</p>
               )}
             </div>
+
+            <div className="sm:col-span-2">
+              <PasswordStrengthHint password={password} />
+            </div>
           </div>
 
-          {/* Register Button */}
           <button
             type="submit"
             disabled={isLoading}
@@ -253,7 +241,6 @@ export default function Register() {
             {isLoading ? "Creando cuenta..." : "Crear cuenta"}
           </button>
 
-          {/* Volver al inicio - integrado en el recuadro */}
           <div className="text-center border-t-2 border-gray-100 pt-3.5">
             <Link
               to="/login"

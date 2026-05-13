@@ -3,6 +3,12 @@ import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Logo } from "../components/Logo";
+import {
+  getPasswordValidationMessage,
+  isPasswordValid,
+  PasswordInput,
+  PasswordStrengthHint,
+} from "../components/PasswordInput";
 import { supabase } from "../../lib/supabase";
 
 interface ResetPasswordFormData {
@@ -23,7 +29,7 @@ export default function ResetPassword() {
     formState: { errors },
   } = useForm<ResetPasswordFormData>();
 
-  const passwordValue = watch("password");
+  const passwordValue = watch("password") || "";
 
   useEffect(() => {
     let mounted = true;
@@ -193,28 +199,16 @@ export default function ResetPassword() {
               >
                 Nueva contraseña *
               </label>
-              <input
+              <PasswordInput
                 id="password"
-                type="password"
-                placeholder="Mínimo 6 caracteres"
+                placeholder="Mínimo 8 caracteres"
+                hasError={Boolean(errors.password)}
                 {...register("password", {
                   required: "La contraseña es obligatoria",
-                  minLength: {
-                    value: 6,
-                    message: "La contraseña debe tener al menos 6 caracteres",
-                  },
+                  validate: (value) => isPasswordValid(value) || getPasswordValidationMessage(),
                 })}
-                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
-                style={{
-                  borderColor: errors.password ? "#EF4444" : "#E5ECEC",
-                }}
-                onFocus={(e) =>
-                  (e.target.style.borderColor = errors.password ? "#EF4444" : "#12B8B2")
-                }
-                onBlur={(e) =>
-                  (e.target.style.borderColor = errors.password ? "#EF4444" : "#E5ECEC")
-                }
               />
+              <PasswordStrengthHint password={passwordValue} />
               {errors.password && (
                 <p className="text-sm text-red-500 mt-2">{errors.password.message}</p>
               )}
@@ -228,25 +222,15 @@ export default function ResetPassword() {
               >
                 Confirmar contraseña *
               </label>
-              <input
+              <PasswordInput
                 id="confirmPassword"
-                type="password"
                 placeholder="Repite la contraseña"
+                hasError={Boolean(errors.confirmPassword)}
                 {...register("confirmPassword", {
                   required: "Debes confirmar la contraseña",
                   validate: (value) =>
                     value === passwordValue || "Las contraseñas no coinciden",
                 })}
-                className="w-full border-2 rounded-xl px-4 py-2.5 text-base text-gray-700 outline-none transition-colors bg-white"
-                style={{
-                  borderColor: errors.confirmPassword ? "#EF4444" : "#E5ECEC",
-                }}
-                onFocus={(e) =>
-                  (e.target.style.borderColor = errors.confirmPassword ? "#EF4444" : "#12B8B2")
-                }
-                onBlur={(e) =>
-                  (e.target.style.borderColor = errors.confirmPassword ? "#EF4444" : "#E5ECEC")
-                }
               />
               {errors.confirmPassword && (
                 <p className="text-sm text-red-500 mt-2">{errors.confirmPassword.message}</p>
