@@ -11,6 +11,22 @@ interface LoginFormData {
   password: string;
 }
 
+function getHomePathByRole(role?: string | null) {
+  return role === "cuidador" ? "/inicio-cuidador" : "/inicio";
+}
+
+function getStoredUserRole() {
+  try {
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) return null;
+
+    const parsedUser = JSON.parse(savedUser);
+    return typeof parsedUser?.rol === "string" ? parsedUser.rol : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function Login() {
   const navigate = useNavigate();
   const { login, isAuthenticated, userRole } = useAuth();
@@ -26,7 +42,7 @@ export default function Login() {
     setIsLoading(true);
     try {
       await login(data.email, data.password);
-      navigate("/inicio");
+      navigate(getHomePathByRole(getStoredUserRole()), { replace: true });
     } catch (error: any) {
       console.error("Error en login:", error);
       toast.error(error.message || "Credenciales incorrectas. Por favor, verifica tus datos.");
@@ -36,7 +52,7 @@ export default function Login() {
   };
 
   if (isAuthenticated) {
-    return <Navigate to={userRole === "cuidador" ? "/inicio-cuidador" : "/inicio"} replace />;
+    return <Navigate to={getHomePathByRole(userRole)} replace />;
   }
 
   return (
