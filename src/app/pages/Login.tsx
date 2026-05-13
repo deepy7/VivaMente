@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { Logo } from "../components/Logo";
 import { PasswordInput } from "../components/PasswordInput";
@@ -13,8 +13,7 @@ interface LoginFormData {
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
-  const [rememberMe, setRememberMe] = useState(false);
+  const { login, isAuthenticated, userRole } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -35,6 +34,10 @@ export default function Login() {
       setIsLoading(false);
     }
   };
+
+  if (isAuthenticated) {
+    return <Navigate to={userRole === "cuidador" ? "/inicio-cuidador" : "/inicio"} replace />;
+  }
 
   return (
     <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-4 sm:py-6">
@@ -105,19 +108,7 @@ export default function Login() {
             )}
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-5 h-5 rounded border-gray-300 cursor-pointer"
-                style={{
-                  accentColor: "#12B8B2",
-                }}
-              />
-              <span className="text-sm text-gray-600">Recordarme</span>
-            </label>
+          <div className="flex justify-end mb-5">
             <Link
               to="/forgot-password"
               className="text-sm hover:underline"

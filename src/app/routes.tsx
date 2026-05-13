@@ -18,6 +18,31 @@ import ProfileCuidador from "./pages/ProfileCuidador";
 import GestionUsuarios from "./pages/GestionUsuarios";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RoleRoute from "./components/RoleRoute";
+import { useAuth } from "./context/AuthContext";
+
+function getAuthenticatedHomePath(userRole: "usuario" | "cuidador" | null) {
+  return userRole === "cuidador" ? "/inicio-cuidador" : "/inicio";
+}
+
+function RootRedirect() {
+  const { isAuthenticated, isLoading, userRole } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-dvh flex items-center justify-center">
+        <div className="text-center">
+          <div
+            className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4"
+            style={{ borderColor: "#12B8B2", borderTopColor: "transparent" }}
+          />
+          <p className="text-gray-600">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return <Navigate to={isAuthenticated ? getAuthenticatedHomePath(userRole) : "/login"} replace />;
+}
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +50,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/login" replace />,
+        element: <RootRedirect />,
       },
 
       {
