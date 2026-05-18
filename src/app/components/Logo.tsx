@@ -1,4 +1,4 @@
-import logoVivaMente from "../../logo_vivamente_sin_fondo.png";
+import logoVivaMente from "../../logo_vivamente_blanco.png";
 
 export function Logo({ size = 120 }: { size?: number }) {
   return (
