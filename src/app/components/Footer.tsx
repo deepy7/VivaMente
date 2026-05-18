@@ -28,7 +28,7 @@ export function Footer() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
           <div className="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-3">
-            <Logo size={40} />
+            <Logo size={40} variant="white" />
             <div>
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
                 <span

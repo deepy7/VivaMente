@@ -1,9 +1,20 @@
 import logoVivaMente from "../../logo_vivamente_sin_fondo.png";
+import logoVivaMenteBlanco from "../../logo_vivamente_blanco.png";
 
-export function Logo({ size = 120 }: { size?: number }) {
+type LogoVariant = "default" | "white";
+
+export function Logo({
+  size = 120,
+  variant = "default",
+}: {
+  size?: number;
+  variant?: LogoVariant;
+}) {
+  const logoSrc = variant === "white" ? logoVivaMenteBlanco : logoVivaMente;
+
   return (
     <img
-      src={logoVivaMente}
+      src={logoSrc}
       alt="VivaMente"
       width={size}
       height={size}
