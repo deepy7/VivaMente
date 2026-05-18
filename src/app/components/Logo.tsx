@@ -1,5 +1,5 @@
-import logoVivaMente from "../../logo_vivamente_sin_fondo.png";
-import logoVivaMenteBlanco from "../../logo_vivamente_blanco.png";
+import logoVivaMente from "../../logo_vivamente_sin_fondo_v2.png";
+import logoVivaMenteBlanco from "../../logo_blanco.png";
 
 type LogoVariant = "default" | "white";
 
