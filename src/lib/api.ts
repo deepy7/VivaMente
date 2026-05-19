@@ -1,4 +1,4 @@
-import { projectId, publicAnonKey } from '/utils/supabase/info';
+import { projectId, publicAnonKey } from '../config/supabase';
 
 const API_BASE = `https://${projectId}.supabase.co/functions/v1/make-server-ae96b5cd`;
 
