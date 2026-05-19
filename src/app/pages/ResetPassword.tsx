@@ -113,7 +113,7 @@ export default function ResetPassword() {
       <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-4 sm:py-6">
         <div className="w-full max-w-md text-center">
           <div className="flex justify-center mb-2">
-            <Logo size={88} />
+            <Logo size={80} />
           </div>
           <p className="text-xl text-gray-600">Comprobando enlace de recuperación...</p>
         </div>
@@ -127,7 +127,7 @@ export default function ResetPassword() {
         <div className="w-full max-w-md">
           <div className="text-center mb-4 sm:mb-5">
             <div className="flex justify-center mb-2">
-              <Logo size={88} />
+              <Logo size={80} />
             </div>
             <h1 className="text-3xl sm:text-4xl mb-2" style={{ fontWeight: 700, color: "#1f2937" }}>
               Enlace no válido
@@ -176,7 +176,7 @@ export default function ResetPassword() {
       <div className="w-full max-w-md">
         <div className="text-center mb-4 sm:mb-5">
           <div className="flex justify-center mb-2">
-            <Logo size={88} />
+            <Logo size={80} />
           </div>
           <h1 className="text-3xl sm:text-4xl mb-2" style={{ fontWeight: 700, color: "#1f2937" }}>
             Restablecer contraseña

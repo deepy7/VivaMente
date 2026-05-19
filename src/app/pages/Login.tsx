@@ -60,7 +60,7 @@ export default function Login() {
       <div className="w-full max-w-md">
         <div className="text-center mb-4 sm:mb-5">
           <div className="flex justify-center mb-1.5 sm:mb-2">
-            <Logo size={88} />
+            <Logo size={80} />
           </div>
           <h1 className="text-3xl sm:text-4xl mb-2" style={{ fontWeight: 700, color: "#1f2937" }}>
             Bienvenido

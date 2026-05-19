@@ -53,9 +53,9 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3">
+    <div className="min-h-dvh flex items-center justify-center px-4 sm:px-6 py-1 sm:py-2">
       <div className="w-full max-w-md">
-        <div className="text-center mb-2.5 sm:mb-3">
+        <div className="text-center mb-2">
           <div className="flex justify-center mb-0.5">
             <Logo size={80} />
           </div>
@@ -65,25 +65,15 @@ export default function Register() {
           <p className="text-base sm:text-lg text-gray-600">
             Completa el formulario para registrarte
           </p>
-          <p className="text-sm text-gray-500 mt-1">
-            ¿Ya tienes cuenta?{" "}
-            <Link
-              to="/login"
-              className="hover:underline"
-              style={{ color: "#12B8B2", fontWeight: 600 }}
-            >
-              Inicia sesión
-            </Link>
-          </p>
         </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="bg-white rounded-3xl border-2 p-3.5 sm:p-4 shadow-xl"
+          className="bg-white rounded-3xl border-2 p-3 sm:p-3.5 shadow-xl"
           style={{ borderColor: "#E5ECEC" }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-2.5">
             <div>
               <label
                 htmlFor="nombre"
@@ -147,7 +137,7 @@ export default function Register() {
             </div>
           </div>
 
-          <div className="mb-3">
+          <div className="mb-2.5">
             <label
               htmlFor="email"
               className="block text-sm mb-1.5 text-gray-700"
@@ -178,7 +168,7 @@ export default function Register() {
             )}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-3">
             <div>
               <label
                 htmlFor="password"
@@ -232,7 +222,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full text-white rounded-xl py-2.5 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mb-3.5"
+            className="w-full text-white rounded-xl py-2.5 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               background: "#12B8B2",
               fontWeight: 700,
@@ -241,15 +231,18 @@ export default function Register() {
             {isLoading ? "Creando cuenta..." : "Crear cuenta"}
           </button>
 
-          <div className="text-center border-t-2 border-gray-100 pt-3">
+          <div className="my-3 border-t-2 border-gray-100"></div>
+
+          <p className="text-center text-sm text-gray-600">
+            ¿Ya tienes cuenta?{" "}
             <Link
               to="/login"
-              className="text-sm hover:underline"
+              className="hover:underline"
               style={{ color: "#12B8B2", fontWeight: 600 }}
             >
-              ← Volver al inicio
+              Inicia sesión
             </Link>
-          </div>
+          </p>
         </form>
       </div>
     </div>
