@@ -1,7 +1,8 @@
 import logoVivaMente from "../../assets/branding/logo_vivamente_sin_fondo_v2.png";
 import logoVivaMenteBlanco from "../../assets/branding/logo_blanco.png";
+import logoVivaMenteHorizontal from "../../assets/branding/logo_vivamente_horizontal.png";
 
-type LogoVariant = "default" | "white";
+type LogoVariant = "default" | "white" | "horizontal";
 
 export function Logo({
   size = 120,
@@ -10,7 +11,12 @@ export function Logo({
   size?: number;
   variant?: LogoVariant;
 }) {
-  const logoSrc = variant === "white" ? logoVivaMenteBlanco : logoVivaMente;
+  const logoSrc =
+    variant === "white"
+      ? logoVivaMenteBlanco
+      : variant === "horizontal"
+        ? logoVivaMenteHorizontal
+        : logoVivaMente;
 
   return (
     <img
