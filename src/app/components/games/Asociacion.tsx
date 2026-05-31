@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
  * Funcionamiento:
  * 1. Mostrar una imagen
  * 2. Mostrar 3 palabras/conceptos
- * 3. Usuario selecciona la palabra correcta
+ * 3. El usuario selecciona la palabra correcta
  */
 
 interface QuestionData {
@@ -82,17 +82,17 @@ export function Asociacion({ onComplete }: AsociacionProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="text-center max-w-3xl w-full">
-        {/* Progreso simple */}
+        {/* Progreso */}
         <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6" style={{ fontWeight: 600 }}>
           Pregunta {currentQuestion + 1} de {questions.length}
         </p>
 
-        {/* Instrucción clara */}
+        {/* Instrucciones */}
         <p className="text-xl sm:text-2xl text-gray-800 mb-5 sm:mb-6" style={{ fontWeight: 700 }}>
           ¿Qué es esto?
         </p>
 
-        {/* Imagen grande */}
+        {/* Imagen */}
         <div
           className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 mx-auto rounded-3xl border-4 flex items-center justify-center text-6xl sm:text-7xl lg:text-8xl bg-white shadow-xl mb-6 sm:mb-8"
           style={{ borderColor: "#12B8B2" }}
@@ -100,7 +100,7 @@ export function Asociacion({ onComplete }: AsociacionProps) {
           {question.image}
         </div>
 
-        {/* Opciones grandes */}
+        {/* Opciones */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-5 max-w-2xl mx-auto mb-5 sm:mb-6">
           {question.options.map((word, idx) => {
             const isSelected = selectedWord === word;
@@ -134,7 +134,7 @@ export function Asociacion({ onComplete }: AsociacionProps) {
           })}
         </div>
 
-        {/* Feedback simple */}
+        {/* Feedback */}
         {showFeedback && (
           <div className="mt-4">
             {selectedWord === question.correctWord ? (

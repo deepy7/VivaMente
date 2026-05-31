@@ -49,14 +49,14 @@ export default function ForgotPassword() {
           </p>
         </div>
 
-        {/* Card */}
+        {/* Tarjeta */}
         <div
           className="bg-white rounded-3xl border-2 p-5 sm:p-6 shadow-xl"
           style={{ borderColor: "#E5ECEC" }}
         >
           {!sent ? (
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-              {/* Email */}
+              {/* Correo */}
               <div className="mb-5">
                 <label
                   htmlFor="email"
@@ -88,7 +88,7 @@ export default function ForgotPassword() {
                 )}
               </div>
 
-              {/* Submit Button */}
+              {/* Botón de envío */}
               <button
                 type="submit"
                 className="w-full text-white rounded-xl py-3 text-base transition-all hover:scale-[1.02] shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mb-5"
@@ -101,7 +101,7 @@ export default function ForgotPassword() {
                 {isLoading ? "Enviando..." : "Enviar instrucciones"}
               </button>
 
-              {/* Volver al inicio - integrado en el recuadro */}
+              {/* Volver al inicio */}
               <div className="text-center border-t-2 border-gray-100 pt-4">
                 <Link
                   to="/login"

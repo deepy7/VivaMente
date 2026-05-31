@@ -40,11 +40,11 @@ export default function Exercise() {
   const GameComponent = game.component;
 
   const handleComplete = (aciertos: number, errores: number, tiempo: number) => {
-    // Calcular puntuación basada en porcentaje de aciertos
-    // Total de preguntas = aciertos + errores (lo que respondió o debió responder)
+    // Cálculo de puntuación basada en porcentaje de aciertos
+    // Total de preguntas = aciertos + errores
     const totalPreguntas = aciertos + errores;
     
-    // Si no hay preguntas (caso edge), score = 0
+    // Si no hay preguntas => score = 0
     if (totalPreguntas === 0) {
       navigate("/resultados", {
         state: { gameId, score: 0, aciertos: 0, errores: 0, tiempo },
@@ -52,7 +52,7 @@ export default function Exercise() {
       return;
     }
     
-    // Calcular porcentaje: (aciertos / total) * 100
+    // Cálculo de porcentaje: (aciertos / total) * 100
     const score = Math.round((aciertos / totalPreguntas) * 100);
 
     navigate("/resultados", {
@@ -68,12 +68,12 @@ export default function Exercise() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7 lg:py-8">
-      {/* Header mejorado */}
+      {/* Header */}
       <div
         className="rounded-3xl border-2 bg-white px-5 sm:px-7 lg:px-8 py-5 sm:py-6 lg:py-7 shadow-xl"
         style={{ borderColor: "#E5ECEC" }}
       >
-        {/* Header mejorado */}
+        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 sm:mb-5 lg:mb-6">
           <div className="flex items-center gap-4 sm:gap-6 min-w-0">
             <span className="text-5xl sm:text-6xl shrink-0">{game.icon}</span>
@@ -102,7 +102,7 @@ export default function Exercise() {
         {/* Divisor */}
         <div className="border-t-2 border-gray-100 mb-4 sm:mb-5 lg:mb-6"></div>
 
-        {/* Game Component */}
+        {/* Componente de juego */}
         <div className="py-1 sm:py-2">
           <GameComponent onComplete={handleComplete} />
         </div>

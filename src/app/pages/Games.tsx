@@ -65,7 +65,7 @@ export default function Games() {
               className="rounded-3xl border-2 bg-white overflow-hidden hover:shadow-2xl transition-all relative group"
               style={{ borderColor: "#E5ECEC" }}
             >
-              {/* Botón de favorito */}
+              {/* Botón de favoritos */}
               <button
                 onClick={async (e) => {
                   e.preventDefault();
@@ -95,7 +95,7 @@ export default function Games() {
                 </p>
                 <p className="text-base text-gray-600 text-center leading-relaxed">{game.desc}</p>
                 
-                {/* Indicador visual de "Jugar" al hacer hover */}
+                {/* Indicador visual de "Jugar" */}
                 <div 
                   className="mt-2 sm:mt-4 px-6 py-3 rounded-xl text-white text-sm opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity"
                   style={{ backgroundColor: "#12B8B2", fontWeight: 700 }}

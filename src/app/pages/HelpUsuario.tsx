@@ -54,7 +54,7 @@ export default function HelpUsuario() {
       </h1>
       <p className="text-base sm:text-lg text-gray-600 mb-8 sm:mb-10">¿Necesitas ayuda? Aquí encontrarás respuestas</p>
 
-      {/* FAQs expandibles - TODOS con el mismo color púrpura */}
+      {/* FAQs */}
       <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-10">
         {helpFaqs.map((faq) => {
           const isOpen = openFaq === faq.id;
@@ -65,7 +65,7 @@ export default function HelpUsuario() {
               className="rounded-3xl border-2 bg-white overflow-hidden shadow-lg transition-all hover:shadow-xl"
               style={{ borderColor: "#E5ECEC" }}
             >
-              {/* Botón expandible */}
+              {/* Botón de preguntas */}
               <button
                 onClick={() => toggleFaq(faq.id)}
                 className="w-full flex items-center justify-between p-5 sm:p-6 lg:p-8 text-left hover:bg-gray-50 transition-colors"
@@ -85,7 +85,7 @@ export default function HelpUsuario() {
                 </div>
               </button>
 
-              {/* Respuesta - se expande al hacer clic */}
+              {/* Respuesta */}
               {isOpen && (
                 <div 
                   className="px-5 sm:px-6 lg:px-8 pb-5 sm:pb-6 lg:pb-8 pt-0"
@@ -101,7 +101,7 @@ export default function HelpUsuario() {
         })}
       </div>
 
-      {/* Mensaje de ánimo */}
+      {/* Mensaje */}
       <div
         className="rounded-3xl border-2 bg-white p-6 sm:p-8 lg:p-10 text-center shadow-xl"
         style={{ borderColor: "#E5ECEC" }}

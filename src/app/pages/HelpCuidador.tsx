@@ -1,7 +1,3 @@
-/**
- * Vista de Ayuda para CUIDADOR
- * Incluye FAQs específicas y formulario de contacto
- */
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Mail, MessageSquare, Send } from "lucide-react";
 import { caregiverApi } from "../../lib/api";

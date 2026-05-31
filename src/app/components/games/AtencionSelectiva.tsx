@@ -6,7 +6,7 @@ import { useState } from "react";
  * Funcionamiento:
  * 1. Mostrar una cuadrícula de elementos similares
  * 2. Uno de ellos es diferente
- * 3. Usuario debe encontrar el elemento diferente
+ * 3. El usuario debe encontrar el elemento diferente
  */
 
 interface Round {
@@ -65,17 +65,17 @@ export function AtencionSelectiva({ onComplete }: AtencionSelectivaProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="text-center max-w-3xl w-full">
-        {/* Progreso simple */}
+        {/* Progreso */}
         <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6" style={{ fontWeight: 600 }}>
           Ronda {currentRound + 1} de {rounds.length}
         </p>
 
-        {/* Instrucción clara y simple */}
+        {/* Instrucciones */}
         <p className="text-xl sm:text-2xl text-gray-800 mb-5 sm:mb-8" style={{ fontWeight: 700 }}>
           Encuentra el diferente
         </p>
 
-        {/* Grid de elementos - solo 6 elementos en 2 filas */}
+        {/* Grid de elementos */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5 lg:gap-6 max-w-2xl mx-auto mb-5 sm:mb-6">
           {round.elements.map((elem, idx) => {
             const isSelected = selectedIndex === idx;
@@ -108,7 +108,7 @@ export function AtencionSelectiva({ onComplete }: AtencionSelectivaProps) {
           })}
         </div>
 
-        {/* Feedback simple */}
+        {/* Feedback */}
         {showFeedback && (
           <div className="mt-6">
             {selectedIndex === round.differentIndex ? (

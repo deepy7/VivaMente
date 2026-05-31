@@ -24,7 +24,7 @@ export default function Home() {
     );
   }
 
-  // Si no está autenticado, redirigir a login
+  // Si no está autenticado, redirige a login
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }

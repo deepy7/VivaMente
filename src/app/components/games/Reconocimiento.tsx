@@ -6,8 +6,7 @@ import { useState } from "react";
  * Funcionamiento:
  * 1. Mostrar un objeto objetivo
  * 2. Mostrar una cuadrícula de 6 objetos
- * 3. Usuario debe identificar todos los objetos que coinciden con el objetivo
- * SIN tiempo límite - para evitar estrés en usuarios con Alzheimer
+ * 3. El usuario debe identificar todos los objetos que coinciden con el objetivo
  */
 
 interface Round {

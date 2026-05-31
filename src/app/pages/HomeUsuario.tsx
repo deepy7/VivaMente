@@ -4,9 +4,9 @@ import { Brain, Waypoints, Handshake, Eye, Search, List } from "lucide-react";
 export default function HomeUsuario() {
   return (
     <div className="min-h-full">
-      {/* Hero Section */}
+      {/* Bloque principal */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
-        {/* Left - Content */}
+        {/* Contenido de presentación */}
         <div className="flex-1 w-full">
           <div className="inline-block px-4 py-2 rounded-full mb-4 sm:mb-5" style={{ backgroundColor: "#EFFCFB", border: "1px solid #CDECEA" }}>
             <p className="text-sm" style={{ color: "#111827", fontWeight: 600 }}>
@@ -47,7 +47,7 @@ export default function HomeUsuario() {
             </Link>
           </div>
 
-          {/* Stats */}
+          {/* Estadísticas */}
           <div className="grid grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-10 pt-6 border-t border-gray-100">
             <div>
               <p className="text-3xl mb-1" style={{ fontWeight: 700, color: "#12B8B2" }}>6</p>
@@ -64,10 +64,10 @@ export default function HomeUsuario() {
           </div>
         </div>
 
-        {/* Right - Visual Preview */}
+        {/* Previsualización */}
         <div className="flex-1 w-full flex justify-center">
           <div className="relative w-full max-w-[420px]">
-            {/* Main card */}
+            {/* Tarjeta principal */}
             <div 
               className="w-full aspect-[21/25] min-h-[380px] rounded-3xl p-5 sm:p-7 lg:p-8 flex flex-col shadow-2xl"
               style={{ 
@@ -84,7 +84,7 @@ export default function HomeUsuario() {
                 </div>
               </div>
 
-              {/* Game cards grid */}
+              {/* Tarjeta de juegos*/}
               <div className="grid grid-cols-2 gap-3 flex-1">
                 {[
                   { icon: "🧠", label: "Memoria Visual" },
@@ -107,7 +107,7 @@ export default function HomeUsuario() {
                 ))}
               </div>
 
-              {/* Start button */}
+              {/* Botón de empezar */}
               <Link
                 to="/juegos"
                 className="mt-4 w-full bg-white text-gray-900 py-4 rounded-xl text-center transition-transform hover:scale-105 block"
@@ -117,7 +117,7 @@ export default function HomeUsuario() {
               </Link>
             </div>
 
-            {/* Decorative elements */}
+            {/* Elementos */}
             <div 
               className="absolute -top-4 -right-4 w-20 h-20 rounded-full"
               style={{ background: "#12B8B2", opacity: 0.3 }}
@@ -130,7 +130,7 @@ export default function HomeUsuario() {
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Ejercicios disponibles */}
       <div className="bg-gray-50 py-10 sm:py-14 lg:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">

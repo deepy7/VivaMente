@@ -6,7 +6,7 @@ import { Footer } from "../components/Footer";
 export default function Root() {
   const location = useLocation();
 
-  // Scroll to top en cada cambio de ruta
+  // Scroll hacia arriba en cada cambio de ruta
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);

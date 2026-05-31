@@ -97,7 +97,7 @@ function clearApiCacheForToken(token: string) {
 }
 
 // ============================================
-// AUTH API
+// API DE AUTENTICACIÓN
 // ============================================
 
 export interface RegisterUserData {
@@ -150,7 +150,7 @@ export const authApi = {
 };
 
 // ============================================
-// GAME API
+// API DE JUEGOS
 // ============================================
 
 export interface GameResultData {
@@ -317,7 +317,7 @@ export const userApi = {
 };
 
 // ============================================
-// CAREGIVER API
+// API DE CUIDADOR
 // ============================================
 
 export interface CaregiverUserGameStat {

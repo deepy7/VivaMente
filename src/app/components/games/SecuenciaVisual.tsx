@@ -6,9 +6,7 @@ import { useState } from "react";
  * Funcionamiento:
  * 1. Mostrar una secuencia de emojis con uno faltante (?)
  * 2. Mostrar 3 opciones simples
- * 3. Usuario debe elegir el emoji que completa la secuencia
- * 
- * SIMPLIFICADO: Patrones más obvios para usuarios con Alzheimer
+ * 3. El usuario debe elegir el emoji que completa la secuencia
  */
 
 interface SequenceData {
@@ -83,12 +81,12 @@ export function SecuenciaVisual({ onComplete }: SecuenciaVisualProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="text-center max-w-3xl w-full">
-        {/* Progreso simple */}
+        {/* Progreso */}
         <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6" style={{ fontWeight: 600 }}>
           Secuencia {currentSequence + 1} de {sequences.length}
         </p>
 
-        {/* Instrucción MUY clara */}
+        {/* Instrucciones */}
         <p className="text-xl sm:text-2xl text-gray-800 mb-5 sm:mb-8" style={{ fontWeight: 700 }}>
           ¿Qué falta aquí?
         </p>
@@ -115,7 +113,7 @@ export function SecuenciaVisual({ onComplete }: SecuenciaVisualProps) {
           ))}
         </div>
 
-        {/* Opciones grandes y simples - solo 3 */}
+        {/* Opciones */}
         <div className="grid grid-cols-3 gap-3 sm:gap-5 lg:gap-6 max-w-2xl mx-auto mb-5 sm:mb-6">
           {sequence.options.map((option, idx) => {
             const isSelected = selectedAnswer === option;
@@ -148,7 +146,7 @@ export function SecuenciaVisual({ onComplete }: SecuenciaVisualProps) {
           })}
         </div>
 
-        {/* Feedback simple */}
+        {/* Feedback */}
         {showFeedback && (
           <div className="mt-4">
             {selectedAnswer === sequence.correctAnswer ? (

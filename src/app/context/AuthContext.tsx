@@ -29,7 +29,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  // Rehidratar inmediatamente desde localStorage
+  // Cargar el usuario guardado en localStorage al iniciar la aplicación
   const [user, setUser] = useState<User | null>(() => {
     try {
       const savedUser = localStorage.getItem("user");
@@ -101,7 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const parsedUser: User = JSON.parse(savedUser);
 
-        // Mantener sesión local mientras verificamos
+        // Mantener sesión local mientras se verifica
         setUser(parsedUser);
         setUserRole(parsedUser.rol);
         setAccessToken(token);

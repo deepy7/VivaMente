@@ -557,7 +557,7 @@ app.get("/make-server-ae96b5cd/health", (c) => {
 });
 
 // ============================================
-// AUTH ENDPOINTS
+// ENDPOINTS DE AUTENTICACIÓN
 // ============================================
 
 app.post("/make-server-ae96b5cd/auth/register", async (c) => {

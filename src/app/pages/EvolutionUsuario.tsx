@@ -90,11 +90,11 @@ export default function EvolutionUsuario() {
         </div>
       </div>
 
-      {/* Tarjeta principal - simplificada */}
+      {/* Tarjeta principal */}
       <div className="rounded-3xl border-2 bg-white p-5 sm:p-6 lg:p-8 shadow-lg text-center mb-5 sm:mb-6"
         style={{ borderColor: "#E5ECEC" }}>
         
-        {/* Ícono grande */}
+        {/* Icono grande */}
         <div className="flex justify-center mb-4 sm:mb-5">
           <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full flex items-center justify-center"
             style={{ 
@@ -104,7 +104,7 @@ export default function EvolutionUsuario() {
           </div>
         </div>
 
-        {/* Mensaje motivacional */}
+        {/* Mensaje */}
         <h2 className="text-3xl sm:text-4xl lg:text-5xl mb-2 sm:mb-3" style={{ fontWeight: 700, color: "#1f2937" }}>
           ¡Lo estás haciendo genial!
         </h2>
@@ -112,7 +112,7 @@ export default function EvolutionUsuario() {
           Sigue así, cada día mejoras más
         </p>
 
-        {/* Estadísticas en dos columnas */}
+        {/* Estadísticas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 max-w-2xl mx-auto">
           {/* Racha de días */}
           <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border-2" style={{ borderColor: "#E5ECEC" }}>
@@ -150,7 +150,7 @@ export default function EvolutionUsuario() {
         </div>
       </div>
 
-      {/* Progreso de juegos - simplificado */}
+      {/* Progreso de juegos */}
       <div className="rounded-3xl border-2 bg-white p-5 sm:p-6 lg:p-8 shadow-lg"
         style={{ borderColor: "#E5ECEC" }}>
         

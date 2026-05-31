@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
  * 1. Mostrar 4 imágenes durante 5 segundos
  * 2. Ocultar imágenes
  * 3. Mostrar 8 opciones (incluye las originales + distractores)
- * 4. Usuario selecciona las que vio
+ * 4. El usuario selecciona las que vio
  */
 
 const allImages = ["🐱", "🐶", "🌺", "🏠", "🎵", "☀️", "🌟", "🎨"];

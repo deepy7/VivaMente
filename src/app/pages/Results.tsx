@@ -9,7 +9,7 @@ export default function Results() {
   const navigate = useNavigate();
   const { accessToken } = useAuth();
   
-  // Obtener datos de resultados desde el state de navegación
+  // Obtener los datos del resultado desde el estado de navegación
   const { gameId, score, aciertos, errores, tiempo } = location.state || {
     gameId: "memoria-visual",
     score: 85,
@@ -61,7 +61,7 @@ export default function Results() {
         Resultado del Ejercicio
       </h1>
 
-      {/* Card principal de resultados */}
+      {/* Tarjeta principal de resultados */}
       <div 
         className="rounded-3xl border-2 bg-white p-5 sm:p-6 lg:p-8 mb-5 sm:mb-6 text-center shadow-2xl" 
         style={{ borderColor: "#E5ECEC" }}
@@ -74,7 +74,7 @@ export default function Results() {
         </p>
         <p className="text-lg sm:text-xl text-gray-500 mb-4 sm:mb-5">de 100 puntos</p>
 
-        {/* Mensaje motivacional */}
+        {/* Mensaje */}
         <div className="py-3 sm:py-4 mb-3 sm:mb-4">
           <p className="text-5xl sm:text-6xl lg:text-7xl mb-3 sm:mb-4">{message.emoji}</p>
           <p className="text-2xl sm:text-3xl lg:text-4xl" style={{ fontWeight: 700, color: message.color }}>
@@ -82,7 +82,7 @@ export default function Results() {
           </p>
         </div>
 
-        {/* Detalles en grid */}
+        {/* Detalles de estadísticas */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 pt-5 border-t-2 border-gray-200 mt-3 sm:mt-4">
           <div className="bg-white rounded-2xl p-4 sm:p-5 shadow-md border-2" style={{ borderColor: "#E5ECEC" }}>
             <p className="text-sm text-gray-600 mb-2" style={{ fontWeight: 600 }}>Aciertos</p>

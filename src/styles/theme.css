@@ -1,12 +1,12 @@
 @theme {
-  /* Color Palette - VivaMente */
+  /* Paleta de colores */
   --color-primary: #12B8B2;        /* Turquesa principal del logo */
-  --color-primary-dark: #0A3F84;   /* Azul profundo del logo */
+  --color-primary-dark: #0A3F84;   /* Azul del logo */
   --color-accent: #6FC7C1;         /* Turquesa suave para logros y detalles */
   --color-success: #12B8B2;        /* Aciertos */
   --color-error: #E88F7A;          /* Errores */
   
-  /* Grays */
+  /* Grises */
   --color-gray-50: #FAFAF8;
   --color-gray-100: #F5F5F3;
   --color-gray-200: #E5ECEC;
@@ -107,11 +107,6 @@
   body {
     @apply bg-background text-foreground overflow-x-hidden;
   }
-
-  /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
-  */
 
   html {
     font-size: var(--font-size);

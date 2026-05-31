@@ -5,8 +5,8 @@ import { useState } from "react";
  * 
  * Funcionamiento:
  * 1. Mostrar dos columnas de elementos
- * 2. Usuario debe emparejar elementos relacionados
- * 3. Clic en elemento izquierda, luego en elemento derecha
+ * 2. El usuario debe emparejar elementos relacionados
+ * 3. Clic en el elemento izquierdo, luego en el elemento derecho
  */
 
 interface Pair {
@@ -52,7 +52,7 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
     if (!selectedLeft || matched.has(item)) return;
 
     if (isMatch(selectedLeft, item)) {
-      // Match correcto
+      // Emparejamiento correcto
       setMatched(new Set([...matched, selectedLeft, item]));
       setAciertos(aciertos + 1);
       setSelectedLeft(null);
@@ -65,7 +65,7 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
         }, 500);
       }
     } else {
-      // Match incorrecto
+      // Emparejamiento incorrecto
       setErrores(errores + 1);
       setSelectedLeft(null);
     }
@@ -74,7 +74,7 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
       <div className="max-w-4xl w-full">
-        {/* Instrucción clara */}
+        {/* Instrucciones */}
         <p className="text-xl sm:text-2xl text-gray-800 mb-2 text-center" style={{ fontWeight: 700 }}>
           Une las parejas
         </p>
@@ -139,7 +139,7 @@ export function Emparejamiento({ onComplete }: EmparejamientoProps) {
           </div>
         </div>
 
-        {/* Contador simple */}
+        {/* Contador */}
         <p className="text-xl text-center mt-6" style={{ fontWeight: 700, color: "#12B8B2" }}>
           {matched.size / 2} / {pairs.length}
         </p>
