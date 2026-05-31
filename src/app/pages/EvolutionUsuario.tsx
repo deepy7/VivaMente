@@ -22,12 +22,10 @@ export default function EvolutionUsuario() {
     const fetchStats = async () => {
       if (accessToken) {
         try {
-          console.log("📊 Obteniendo estadísticas del usuario...");
           const [response, favoritesResponse] = await Promise.all([
             gameApi.getUserStats(accessToken),
             gameApi.getFavorites(accessToken),
           ]);
-          console.log("📊 Respuesta de estadísticas:", response);
           if (response.success) {
             setStats(response.stats);
             const favoriteIds = favoritesResponse.favoritos || [];
@@ -47,7 +45,6 @@ export default function EvolutionUsuario() {
             });
 
             setFavoriteGames(nextFavoriteGames);
-            console.log("✅ Estadísticas cargadas:", response.stats);
           }
         } catch (error) {
           console.error("❌ Error al obtener estadísticas:", error);
@@ -55,7 +52,6 @@ export default function EvolutionUsuario() {
           setLoading(false);
         }
       } else {
-        console.warn("⚠️ No hay accessToken disponible");
         setLoading(false);
       }
     };

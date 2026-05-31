@@ -79,8 +79,6 @@ function buildDateFromDateKey(dateKey: string) {
   return new Date(`${dateKey}T12:00:00.000Z`);
 }
 
-app.use("*", logger(console.log));
-
 app.use(
   "/*",
   cors({
@@ -830,14 +828,6 @@ app.post("/make-server-ae96b5cd/game/result", async (c) => {
     const body = await c.req.json();
     const { gameId, score, aciertos, errores, tiempo } = body;
 
-    console.log(`📝 Guardando resultado para usuario ${auth.user.id}:`, {
-      gameId,
-      score,
-      aciertos,
-      errores,
-      tiempo,
-    });
-
     if (
       !gameId ||
       score === undefined ||
@@ -867,7 +857,6 @@ app.post("/make-server-ae96b5cd/game/result", async (c) => {
     };
 
     await kv.set(`resultado:${resultado.id}`, resultado);
-    console.log(`✅ Resultado guardado con ID: ${resultado.id}`);
 
     const resultadosKey = `resultados_usuario:${auth.user.id}`;
     const resultadosExistentes = (await kv.get(resultadosKey)) || [];

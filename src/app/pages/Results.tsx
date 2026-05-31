@@ -23,17 +23,14 @@ export default function Results() {
     const saveResult = async () => {
       if (accessToken && gameId) {
         try {
-          console.log("Guardando resultado:", { gameId, score, aciertos, errores, tiempo });
           const response = await gameApi.saveResult(
             { gameId, score, aciertos, errores, tiempo },
             accessToken
           );
-          console.log("✅ Resultado guardado exitosamente:", response);
         } catch (error) {
           console.error("❌ Error al guardar resultado:", error);
         }
       } else {
-        console.warn("⚠️ No se puede guardar resultado - accessToken o gameId faltante:", { accessToken: !!accessToken, gameId });
       }
     };
 
