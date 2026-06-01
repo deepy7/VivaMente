@@ -13,6 +13,7 @@ build/
 
 # supabase
 .supabase/
+supabase/.temp/
 
 # sistema
 .DS_Store
@@ -26,3 +27,7 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#usuarios
+Users.txt
+users.txt
